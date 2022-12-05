@@ -24,6 +24,7 @@ const GameProvider = ({ children }) => {
 		const cards = await DeckOfCardsAPI.getCards(idGame);
 		console.log(cards)
 		cards.forEach((card) => {
+			console.log(card)
 			setPlayerOne({ ...playerOne, cards: [...playerOne.cards, card] });
 		});
 		setPlayerTwo({ ...playerTwo, cards: [...playerTwo.cards, cards[1]] });
