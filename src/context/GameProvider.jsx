@@ -21,14 +21,12 @@ const GameProvider = ({ children }) => {
 	};
 
 	const requestCards = async () => {
-		const cards = await DeckOfCardsAPI.getCards(idGame);
-		console.log(cards)
-		cards.forEach((card) => {
-			console.log(card)
-			
-		});
-		setPlayerOne({ ...playerOne, cards: [...playerOne.cards, ...cards] });
-		setPlayerTwo({ ...playerTwo, cards: [...playerTwo.cards, cards[1]] });
+		const cards1 = await DeckOfCardsAPI.getCards(idGame);
+		const cards2 = await DeckOfCardsAPI.getCards(idGame);
+		console.log(cards1)
+		console.log(cards2)
+		setPlayerOne({ ...playerOne, cards: [...playerOne.cards, ...cards1] });
+		setPlayerTwo({ ...playerTwo, cards: [...playerTwo.cards, ...cards2] });
 
 		const findCardPlayerOne = playerOne.cards.find(
 			card => card.value === cards[0].value
