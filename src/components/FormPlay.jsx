@@ -1,6 +1,8 @@
 import Button from 'react-bootstrap/Button';
 import Stack from 'react-bootstrap/Stack';
 import useGame from '../hooks/useGame';
+import {useEffect } from 'react';
+
 const FormPlay = () => {
 	const { requestCards } = useGame();
 	
