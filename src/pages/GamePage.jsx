@@ -9,12 +9,12 @@ const GamePage = () => {
 		<>
 			<Container className='my-4'>
 				<Row className='justify-content-md-center'>
-					<Col xs={16} md={16}>
+					<Row xs={16} md={16}>
 						<FormPlay />
-					</Col>
-					<Col>
+					</Row>
+					<Row>
 						<ListCards />
-					</Col>
+					</Row>
 				</Row>
 				<Row>
 					<Col>
