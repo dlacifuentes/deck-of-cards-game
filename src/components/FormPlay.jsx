@@ -3,6 +3,15 @@ import Stack from 'react-bootstrap/Stack';
 import useGame from '../hooks/useGame';
 const FormPlay = () => {
 	const { requestCards } = useGame();
+	
+	useEffect(() => {
+		const requestCard = async () => {
+		await requestCards();
+		}
+	requestCard()
+	.catch(console.error);
+	}, [])
+	
 	const handleClick = async () => {
 		await requestCards();
 	};
