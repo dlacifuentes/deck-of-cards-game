@@ -25,8 +25,9 @@ const GameProvider = ({ children }) => {
 		console.log(cards)
 		cards.forEach((card) => {
 			console.log(card)
-			setPlayerOne({ ...playerOne, cards: [...playerOne.cards, card] });
+			
 		});
+		setPlayerOne({ ...playerOne, cards: [...playerOne.cards, ...cards] });
 		setPlayerTwo({ ...playerTwo, cards: [...playerTwo.cards, cards[1]] });
 
 		const findCardPlayerOne = playerOne.cards.find(
