@@ -22,6 +22,7 @@ const GameProvider = ({ children }) => {
 
 	const requestCards = async () => {
 		const cards = await DeckOfCardsAPI.getCards(idGame);
+		console.log(cards)
 		setPlayerOne({ ...playerOne, cards: [...playerOne.cards, cards[0]] });
 		setPlayerTwo({ ...playerTwo, cards: [...playerTwo.cards, cards[1]] });
 
