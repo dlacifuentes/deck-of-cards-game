@@ -3,10 +3,9 @@ import DeckOfCardsAPI from '../services/deckofcardsapi';
 import GameContext from './GameContext';
 
 const GameProvider = ({ children }) => {
-	const [idGame, setIdGame] = useState(null);
-	const [win, setWin] = useState(false);
-	const [showToast, setShowToast] = useState(false);
-	const [winName, setWinName] = useState('');
+	const [idGame, setIdGame] = useState(null); // Id del juego
+
+	// información de los usuario y sus cartas
 	const [playerOne, setPlayerOne] = useState({
 		name: '',
 		cards: [],
@@ -16,6 +15,13 @@ const GameProvider = ({ children }) => {
 		cards: [],
 	});
 
+	// cartas en juego
+	const [currentCards, setCurrentCards] = useState([]);
+
+	const [win, setWin] = useState(false);
+	const [showToast, setShowToast] = useState(false);
+	const [winName, setWinName] = useState('');
+	
 	const playGame = async () => {
 		setIdGame(await DeckOfCardsAPI.getIdGame());
 	};
@@ -27,6 +33,9 @@ const GameProvider = ({ children }) => {
 		console.log(cards2)
 		setPlayerOne({ ...playerOne, cards: [...playerOne.cards, ...cards1] });
 		setPlayerTwo({ ...playerTwo, cards: [...playerTwo.cards, ...cards2] });
+
+		setCurrentCards([...currentCards, ...playerOne.cards.value])
+		console.log(currentCards)
 
 		const findCardPlayerOne = playerOne.cards.find(
 			card => card.value === cards[0].value
@@ -42,6 +51,7 @@ const GameProvider = ({ children }) => {
 			setWinName(findCardPlayerOne ? playerOne.name : playerTwo.name);
 		}
 	};
+
 
 	return (
 		<GameContext.Provider
