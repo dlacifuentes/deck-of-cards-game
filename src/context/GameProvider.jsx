@@ -15,17 +15,22 @@ const GameProvider = ({ children }) => {
 		cards: [],
 	});
 
-	// cartas en juego
+	// Cartas en juego
 	const [currentCards, setCurrentCards] = useState([]);
+
+	// Nueva carta
+	const [newCard, setNewCard] = useState([]);
 
 	const [win, setWin] = useState(false);
 	const [showToast, setShowToast] = useState(false);
 	const [winName, setWinName] = useState('');
 	
+	// Obtener id de juego
 	const playGame = async () => {
 		setIdGame(await DeckOfCardsAPI.getIdGame());
 	};
 
+	// Solicitar cartas iniciales para ambos jugadores
 	const requestCards = async () => {
 		const cards1 = await DeckOfCardsAPI.getCards(idGame);
 		const cards2 = await DeckOfCardsAPI.getCards(idGame);
@@ -34,22 +39,16 @@ const GameProvider = ({ children }) => {
 		setPlayerOne({ ...playerOne, cards: [...playerOne.cards, ...cards1] });
 		setPlayerTwo({ ...playerTwo, cards: [...playerTwo.cards, ...cards2] });
 
-		setCurrentCards([...currentCards, ...playerOne.cards.value])
+		setCurrentCards([...currentCards, ...playerOne.cards])
 		console.log(currentCards)
 
-		const findCardPlayerOne = playerOne.cards.find(
-			card => card.value === cards[0].value
-		);
+	};
 
-		const findCardPlayerTwo = playerTwo.cards.find(
-			card => card.value === cards[1].value
-		);
-
-		if (findCardPlayerOne || findCardPlayerTwo) {
-			setWin(true);
-			setShowToast(true);
-			setWinName(findCardPlayerOne ? playerOne.name : playerTwo.name);
-		}
+	// Obtener nueva carta
+	const requestCard = async () => {
+		const cards = await DeckOfCardsAPI.getCard(idGame);
+		console.log(cards)
+		setNewCard([...cards]);
 	};
 
 
@@ -62,6 +61,8 @@ const GameProvider = ({ children }) => {
 				setPlayerOne,
 				playerTwo,
 				setPlayerTwo,
+				requestCard,
+				newCard,
 				showToast,
 				setShowToast,
 				winName,

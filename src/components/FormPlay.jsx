@@ -4,7 +4,7 @@ import useGame from '../hooks/useGame';
 import {useEffect } from 'react';
 
 const FormPlay = () => {
-	const { requestCards } = useGame();
+	const { requestCards, requestCard } = useGame();
 	
 	useEffect(() => {
 		const requestCard = async () => {
@@ -15,8 +15,9 @@ const FormPlay = () => {
 	}, [])
 	
 	const handleClick = async () => {
-		await requestCards();
+		await requestCard();
 	};
+
 	return (
 		<Stack gap={2} className='col-md-5 mx-auto'>
 			<Button onClick={handleClick} variant='secondary'>

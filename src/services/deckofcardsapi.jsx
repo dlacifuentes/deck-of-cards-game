@@ -15,7 +15,7 @@ const getCards = async deckId => {
 };
 
 const getCard = async deckId => {
-	const url = `https://deckofcardsapi.com/api/deck/${deckId}/draw/?count=1`;
+	const url = `${cardsApi}/${deckId}/draw/?count=1`;
 	const res = await fetch(url);
 	const data = await res.json();
 	return data?.cards;

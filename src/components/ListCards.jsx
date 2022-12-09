@@ -2,6 +2,7 @@ import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import useGame from '../hooks/useGame';
+import ListNewCards from './ListNewCards';
 
 const ListCards = () => {
 
@@ -25,7 +26,9 @@ const ListCards = () => {
 						))}
 					</div>
 					</Col>
-					<Col sm={1}>prueba</Col>
+					<Col sm={1}>
+						<ListNewCards />
+					</Col>
 				</Row>
 				<Row>
 					<Col sm={11}>
