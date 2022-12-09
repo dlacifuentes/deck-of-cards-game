@@ -18,8 +18,12 @@ const GameProvider = ({ children }) => {
 	// Cartas en juego
 	const [currentCards, setCurrentCards] = useState([]);
 
-	// Nueva carta
-	const [newCard, setNewCard] = useState([]);
+	// Nuevas cartas
+	const [cardPlayerOne, setCardPlayerOne] = useState([]);
+	const [cardPlayerTwo, setCardPlayerTwo] = useState([]);
+
+	// cartas restantes en la baraja
+	const [remaining, setRemaining] = useState(0);
 
 	const [win, setWin] = useState(false);
 	const [showToast, setShowToast] = useState(false);
@@ -44,13 +48,24 @@ const GameProvider = ({ children }) => {
 
 	};
 
-	// Obtener nueva carta
+	// Obtener nuevas cartas para ambos jugadores
 	const requestCard = async () => {
-		const cards = await DeckOfCardsAPI.getCard(idGame);
+		const cards = await DeckOfCardsAPI.getNewCards(idGame);
 		console.log(cards)
-		setNewCard([...cards]);
+		setCardPlayerOne([cards[0]]);
+		setCardPlayerTwo([cards[1]]);
+	//	setNewCard([...cards]);
 	};
 
+	// Obtener cartas restantes
+	const requestRemaining = async () => {
+		const cant = await DeckOfCardsAPI.getRemaining(idGame);
+		console.log('numero antes')
+		console.log(cant)
+		setRemaining(cant);
+		console.log('numero despues')
+		console.log(remaining);
+	};
 
 	return (
 		<GameContext.Provider
@@ -62,7 +77,10 @@ const GameProvider = ({ children }) => {
 				playerTwo,
 				setPlayerTwo,
 				requestCard,
-				newCard,
+				cardPlayerOne,
+				cardPlayerTwo,
+				requestRemaining,
+				remaining,
 				showToast,
 				setShowToast,
 				winName,

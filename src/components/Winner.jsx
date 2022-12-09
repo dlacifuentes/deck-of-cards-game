@@ -1,12 +1,13 @@
 import Toast from 'react-bootstrap/Toast';
-import useGame from '../hooks/useGame';
+// import useGame from '../hooks/useGame';
 import { TfiGame } from 'react-icons/tfi';
 import ToastContainer from 'react-bootstrap/ToastContainer';
-const ToastWinner = () => {
-	const { showToast, setShowToast, winName } = useGame();
+
+const Winner = () => {
+	
 	return (
 		<ToastContainer className='p-3' position='top-start'>
-			<Toast show={showToast} onClose={() => setShowToast(false)}>
+			<Toast>
 				<Toast.Header>
 					<div>
 						<TfiGame />
@@ -14,10 +15,10 @@ const ToastWinner = () => {
 					<strong className='me-auto'>Deck Of cards</strong>
 					<small>Winner</small>
 				</Toast.Header>
-				<Toast.Body>Player {winName}</Toast.Body>
+				<Toast.Body>Winner X</Toast.Body>
 			</Toast>
 		</ToastContainer>
 	);
 };
 
-export default ToastWinner;
+export default Winner;

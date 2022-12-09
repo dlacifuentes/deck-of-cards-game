@@ -3,7 +3,7 @@ import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import FormPlay from '../components/FormPlay';
 import ListCards from '../components/ListCards';
-import ToastWinner from '../components/ToastWinner';
+
 const GamePage = () => {
 	return (
 		<>
@@ -18,7 +18,7 @@ const GamePage = () => {
 				</Row>
 				<Row>
 					<Col>
-						<ToastWinner />
+						prueba
 					</Col>
 				</Row>
 			</Container>
