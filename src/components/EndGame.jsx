@@ -1,13 +1,15 @@
 import Toast from 'react-bootstrap/Toast';
-// import useGame from '../hooks/useGame';
+import useGame from '../hooks/useGame';
 import { TfiGame } from 'react-icons/tfi';
 import ToastContainer from 'react-bootstrap/ToastContainer';
 
 const EndGame = () => {
 
+	const { endGame, setEndGame } = useGame();
+
 	return (
 		<ToastContainer className='p-3' position='top-center'>
-			<Toast bg='dark'>
+			<Toast show={endGame} onClose={() => setEndGame(false)}>
 				<Toast.Header>
 					<div>
 						<TfiGame />
@@ -15,7 +17,7 @@ const EndGame = () => {
 					<strong className='me-auto'>Deck of cards game</strong>
 					<small>End game</small>
 				</Toast.Header>
-				<Toast.Body className='text-white'>
+				<Toast.Body>
 					Game ended without any winner
 				</Toast.Body>
 			</Toast>

@@ -23,11 +23,13 @@ const GameProvider = ({ children }) => {
 	const [cardPlayerTwo, setCardPlayerTwo] = useState([]);
 
 	// cartas restantes en la baraja
-	const [remaining, setRemaining] = useState(0);
+	const [remaining, setRemaining] = useState(32);
 
-	const [win, setWin] = useState(false);
-	const [showToast, setShowToast] = useState(false);
-	const [winName, setWinName] = useState('');
+	// const [win, setWin] = useState(false);
+	// const [winName, setWinName] = useState('');
+
+	// mostrar mensaje de finalización del juego - sin ganador
+	const [endGame, setEndGame] = useState(false);
 	
 	// Obtener id de juego
 	const playGame = async () => {
@@ -54,18 +56,12 @@ const GameProvider = ({ children }) => {
 		console.log(cards)
 		setCardPlayerOne([cards[0]]);
 		setCardPlayerTwo([cards[1]]);
-	//	setNewCard([...cards]);
 	};
 
 	// Obtener cartas restantes
-	const requestRemaining = async () => {
-		const cant = await DeckOfCardsAPI.getRemaining(idGame);
-		console.log('numero antes')
-		console.log(cant)
-		setRemaining(cant);
-		console.log('numero despues')
-		console.log(remaining);
-	};
+	const requestRemaining = () => {
+		setRemaining(remaining - 2);
+	}
 
 	return (
 		<GameContext.Provider
@@ -81,8 +77,8 @@ const GameProvider = ({ children }) => {
 				cardPlayerTwo,
 				requestRemaining,
 				remaining,
-				showToast,
-				setShowToast,
+				endGame,
+				setEndGame,
 				winName,
 			}}
 		>

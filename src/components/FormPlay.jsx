@@ -2,29 +2,29 @@ import Button from 'react-bootstrap/Button';
 import Stack from 'react-bootstrap/Stack';
 import useGame from '../hooks/useGame';
 import {useEffect } from 'react';
-import EndGame from './EndGame';
+// import EndGame from '../components/EndGame';
 
 const FormPlay = () => {
-	const { requestCards, requestCard, requestRemaining, remaining } = useGame();
+	const { requestCards, requestCard, requestRemaining, remaining, setEndGame } = useGame();
 	
 	useEffect(() => {
 		const requestCard = async () => {
 		await requestCards();
-		await requestRemaining();
 		}
 	requestCard()
 	.catch(console.error);
 	}, [])
 	
 	const handleClick = async () => {
-	//	const cant = await DeckOfCardsAPI.getRemaining(idGame);
-		await requestRemaining();
-		console.log(remaining)
+		requestRemaining();
+
 		if(remaining > 0) {
 			await requestCard();
 		} else{
-			return <EndGame />
+			setEndGame(true);
+			// return (<EndGame />);
 		}
+		
 	};
 
 	return (
