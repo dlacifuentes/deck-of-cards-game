@@ -27,6 +27,9 @@ const GameProvider = ({ children }) => {
 
 	// const [win, setWin] = useState(false);
 	// const [winName, setWinName] = useState('');
+	
+	// Cuartas o escaleras
+	const [cuartas, setCuartas] = useState([]);
 
 	// mostrar mensaje de finalización del juego - sin ganador
 	const [endGame, setEndGame] = useState(false);
@@ -45,8 +48,9 @@ const GameProvider = ({ children }) => {
 		setPlayerOne({ ...playerOne, cards: [...playerOne.cards, ...cards1] });
 		setPlayerTwo({ ...playerTwo, cards: [...playerTwo.cards, ...cards2] });
 
-		setCurrentCards([...currentCards, ...playerOne.cards])
-		console.log(currentCards)
+		/* setCurrentCards([...currentCards, ...playerOne.cards])
+		console.log('current cards')
+		console.log(currentCards) */ 
 
 	};
 
@@ -79,7 +83,8 @@ const GameProvider = ({ children }) => {
 				remaining,
 				endGame,
 				setEndGame,
-				winName,
+				cuartas,
+				setCuartas,
 			}}
 		>
 			{children}
