@@ -2,30 +2,38 @@ import useGame from '../hooks/useGame';
 
 const ListCardPlayerOne = () => {
 
-    const { cardPlayerOne, playerOne } = useGame();
+    const { cardPlayerOne, currentCards, setCuartas, setTernas } = useGame();
 
     const findCuartas = () => { 
-        const cards = playerOne.cards
+        const cards = currentCards
 
         cards.map((card) => {
-            const first = card.code
-            console.log("primer")
-            console.log(first)
+            const first = cards[0].code
 
-            const cuartas = cards
+            const coincidencias = cards
             .filter((card) => card.code[0] === first[0])
             .map((card) => {
+                // index de elemento a eliminar
                 const p = cards.map(card1 => card1.code).indexOf(card.code)
-                console.log('prueba ' + p)
-                console.log('new')
+
+                // eliminación del elemento en el array cards
                 cards.splice(p, 1);
-                console.log(cards)
-                return card
+
+                return card  // retorna la carta
             });
 
-            console.log("coincidencia")
-            console.log(cuartas); 
-            console.log(cards)
+            console.log("coincidencias")
+            console.log(coincidencias)
+         /*   if (coincidencias.length === 4){
+                console.log("cuarta")
+             setCuartas(coincidencias)}
+            else if( coincidencias.length === 3){
+                console.log("ternas")
+             setTernas(coincidencias)}
+            else{
+                console.log("unica")
+            } */
+
             return console.log("works!")
 
         })

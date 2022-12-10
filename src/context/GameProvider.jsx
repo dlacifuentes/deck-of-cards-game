@@ -23,13 +23,16 @@ const GameProvider = ({ children }) => {
 	const [cardPlayerTwo, setCardPlayerTwo] = useState([]);
 
 	// cartas restantes en la baraja
-	const [remaining, setRemaining] = useState(32);
+	const [remaining, setRemaining] = useState(12);
 
 	// const [win, setWin] = useState(false);
 	// const [winName, setWinName] = useState('');
 	
 	// Cuartas o escaleras
 	const [cuartas, setCuartas] = useState([]);
+
+	// ternas
+	const [ternas, setTernas] = useState([]);
 
 	// mostrar mensaje de finalización del juego - sin ganador
 	const [endGame, setEndGame] = useState(false);
@@ -48,9 +51,9 @@ const GameProvider = ({ children }) => {
 		setPlayerOne({ ...playerOne, cards: [...playerOne.cards, ...cards1] });
 		setPlayerTwo({ ...playerTwo, cards: [...playerTwo.cards, ...cards2] });
 
-		/* setCurrentCards([...currentCards, ...playerOne.cards])
-		console.log('current cards')
-		console.log(currentCards) */ 
+		setCurrentCards([...cards1]);
+		// console.log('current cards')
+		// console.log(currentCards)  
 
 	};
 
@@ -85,6 +88,8 @@ const GameProvider = ({ children }) => {
 				setEndGame,
 				cuartas,
 				setCuartas,
+				currentCards,
+				setTernas,
 			}}
 		>
 			{children}
