@@ -7,10 +7,10 @@ const ListCardPlayerOne = () => {
 
     const findCuartas = () => { 
         const cards = currentCards
-        const c = [];
-        const t = [];
-        const p = [];
-        const u = [];
+        const c = cuartas;
+        const t = ternas;
+        const p = pares;
+        const u = unique;
 
     /*    cards.sort((card1, card2) => {
             if(card1.code[1] < card2.code[1] ) return -1
@@ -35,17 +35,26 @@ const ListCardPlayerOne = () => {
                 console.log(matches)
                 if (matches.length === 4){
                     c.push(...matches)
-                    setCuartas([...cuartas, ...matches])}
+                    console.log(cuartas.length)
+                   // setCuartas([...cuartas, ...matches])
+                    console.log(cuartas.length)
+                }
                 else if( matches.length === 3){
                     t.push(...matches)
-                    setTernas([...ternas, ...matches])}
+                    console.log(ternas.length)
+                  //  setTernas([...ternas, ...matches])
+                    console.log(ternas.length)}
                 else if( matches.length === 2 ){
                     p.push(...matches)
-                    setPares([...pares, ...matches])}
+                    console.log(pares.length)
+                 //   setPares([...pares, ...matches])
+                    console.log(pares.length)}
                 else{
                     u.push(...matches)
                     console.log("ingreso unico")
-                    setUnique([...unique, ...matches]) 
+                    console.log(unique.length)
+                //    setUnique([...unique, ...matches]) 
+                    console.log(unique.length)
                 }
         
                 return null
