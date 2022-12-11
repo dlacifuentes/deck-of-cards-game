@@ -35,22 +35,22 @@ const ListCardPlayerOne = () => {
                 console.log(matches)
                 console.log("---")
                 if (matches.length === 4){
-                    c.push(...matches)
+                  //  c.push(...matches)
                     console.log(c)
                    // setCuartas([...cuartas, ...matches])
                 }
                 else if( matches.length === 3){
-                    t.push(...matches)
+                  //  t.push(...matches)
                     console.log(t)
                   //  setTernas([...ternas, ...matches])
                 }
                 else if( matches.length === 2 ){
-                    p.push(...matches)
+                //    p.push(...matches)
                     console.log(p)
                  //   setPares([...pares, ...matches])
                 }
                 else{
-                    u.push(...matches)
+                  //  u.push(...matches)
                   // console.log("ingreso unico")
                     console.log(u)
                 //    setUnique([...unique, ...matches]) 
