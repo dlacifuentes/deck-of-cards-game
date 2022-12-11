@@ -96,8 +96,11 @@ const GameProvider = ({ children }) => {
 			});	
 				
 				matches.push(cards[0])
-				console.log("formar cuartas")
+				console.log("formar cuarta")
 				setCuartas([...cuartas, ...matches])
+
+				let primerItem = setUnique((unique) => unique.shift());
+				console.log(primerItem)
 
 		}else{
 			const terna = pares.find(
