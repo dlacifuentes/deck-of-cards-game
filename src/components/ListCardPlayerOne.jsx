@@ -8,10 +8,10 @@ const ListCardPlayerOne = () => {
     const findCuartas = () => { 
         const cards = currentCards
 
-        if(cards.length === 1){
+      /*  if(cards.length === 1){
             console.log("ultimo")
             setUnique([...unique, ...cards])
-        }else{
+        }else{ */
             cards.map((card) => {
                 const first = cards[0].code
 
@@ -37,7 +37,7 @@ const ListCardPlayerOne = () => {
         
                 return null
             })
-        }
+        // }
     }
 
     findCuartas()
