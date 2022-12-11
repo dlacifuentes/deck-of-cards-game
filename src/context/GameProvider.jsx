@@ -23,7 +23,7 @@ const GameProvider = ({ children }) => {
 	const [cardPlayerTwo, setCardPlayerTwo] = useState([]);
 
 	// cartas restantes en la baraja
-	const [remaining, setRemaining] = useState(12);
+	const [remaining, setRemaining] = useState(32);
 
 	// const [win, setWin] = useState(false);
 	// const [winName, setWinName] = useState('');
