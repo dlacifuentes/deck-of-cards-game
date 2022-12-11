@@ -40,6 +40,7 @@ const ListCardPlayerOne = () => {
                     t.push(matches)
                   //  setTernas([...ternas, ...matches])
                 else if( matches.length === 2 )
+<<<<<<< HEAD
                     p.push(matches)
                     // setPares([...pares, ...matches])
                 else {
@@ -48,6 +49,13 @@ const ListCardPlayerOne = () => {
                     u.push(matches)
                    // setUnique([...unique, ...matches])
                 } */
+=======
+                    setPares([...pares, ...matches])
+                else{
+                    console.log("ingreso unico")
+                    setUnique([...unique, ...matches]) 
+                }
+>>>>>>> parent of 8ada7a1 (validación cartas)
         
                 return null
             }) 
