@@ -33,7 +33,7 @@ const ListCardPlayerOne = () => {
                 });
                 
                 console.log(matches)
-                if (matches.length === 4)
+            /*    if (matches.length === 4)
                     c.push(matches)
                     // setCuartas([...cuartas, ...matches])
                 else if( matches.length === 3)
@@ -47,7 +47,7 @@ const ListCardPlayerOne = () => {
                   //  console.log(matches)
                     u.push(matches)
                    // setUnique([...unique, ...matches])
-                }
+                } */
         
                 return null
             }) 
