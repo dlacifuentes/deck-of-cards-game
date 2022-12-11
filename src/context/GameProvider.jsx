@@ -23,7 +23,7 @@ const GameProvider = ({ children }) => {
 	const [cardPlayerTwo, setCardPlayerTwo] = useState([]);
 
 	// cartas restantes en la baraja
-	const [remaining, setRemaining] = useState(32);
+	const [remaining, setRemaining] = useState(12);
 
 	// const [win, setWin] = useState(false);
 	// const [winName, setWinName] = useState('');
@@ -95,9 +95,11 @@ const GameProvider = ({ children }) => {
                     return card 
                 });	
 
-			console.log("coincidencia")
-			console.log(terna)
 			console.log(matches)
+			console.log(cards[0])
+			setTernas([...ternas, ...matches])
+			setTernas([...ternas, cards[0]])
+
 		}
         
 
