@@ -5,64 +5,63 @@ const ListCardPlayerOne = () => {
     const { cardPlayerOne, currentCards, setCuartas, setTernas, setPares,
             pares, ternas, cuartas, unique, setUnique  } = useGame();
 
-    const findCuartas = () => { 
-        const cards = currentCards
-        // const c = cuartas;
-        // const t = ternas;
-        // const p = pares;
-        // const u = unique;
-
-    /*    cards.sort((card1, card2) => {
-            if(card1.code[1] < card2.code[1] ) return -1
-            else if (card1.code[1] > card2.code[1]) return 1;
-            else return 0
-        }); */
-
-            cards.map((card) => {
-                const first = cards[0].code
-
-                const matches = cards
-                .filter((card) => card.code[0] === first[0])
-                .map((card) => {
-                    // index de elemento a eliminar
-                    const p = cards.map(card1 => card1.code).indexOf(card.code)
-
-                    // eliminación del elemento en el array cards
-                    cards.splice(p, 1);
-                    return card  // retorna la carta
-                });
-                
-                console.log(matches)
-                console.log(matches.length)
-         
-                if (matches.length === 4){
-                  //  c.push(...matches)
-                    console.log("cuatro")
-                   // setCuartas([...cuartas, ...matches])
-                }
-                else if( matches.length === 3){
-                  //  t.push(...matches)
-                    console.log("tres")
-                  //  setTernas([...ternas, ...matches])
-                }
-                else if( matches.length === 2 ){
-                //    p.push(...matches)
-                    console.log("dos")
-                 //   setPares([...pares, ...matches])
-                }
-                else{
-                  //  u.push(...matches)
-                  // console.log("ingreso unico")
-                    console.log("uno")
-                //    setUnique([...unique, ...matches]) 
-                }
+            const findCuartas = () => { 
+                const cards = currentCards
+                const c = [];
+                const t = [];
+                const p = [];
+                const u = [];
         
-                return null
-            }) 
-
-    }
-
-    findCuartas()
+            /*    cards.sort((card1, card2) => {
+                    if(card1.code[1] < card2.code[1] ) return -1
+                    else if (card1.code[1] > card2.code[1]) return 1;
+                    else return 0
+                }); */
+        
+                    cards.map((card) => {
+                        const first = cards[0].code
+        
+                        const matches = cards
+                        .filter((card) => card.code[0] === first[0])
+                        .map((card) => {
+                            // index de elemento a eliminar
+                            const p = cards.map(card1 => card1.code).indexOf(card.code)
+        
+                            // eliminación del elemento en el array cards
+                            cards.splice(p, 1);
+                            return card  // retorna la carta
+                        });
+                        
+                       // console.log(matches)
+                        console.log("longitud " + matches.length)
+                        if (matches.length === 4){
+                            console.log("cuarta")
+                            c.push(...matches)
+                            console.log(c)
+                            setCuartas([...cuartas, ...matches])}
+                        else if( matches.length === 3){
+                            console.log("terna")
+                            t.push(...matches)
+                            console.log(t)
+                            setTernas([...ternas, ...matches])}
+                        else if( matches.length === 2 ){
+                            console.log("par")
+                            p.push(...matches)
+                            console.log(p)
+                            setPares([...pares, ...matches])}
+                        else{
+                            u.push(...matches)
+                            console.log("ingreso unico")
+                            setUnique([...unique, ...matches])
+                            console.log(u)
+                        }
+                
+                        return null
+                    }) 
+        
+            }
+        
+            findCuartas()
 
     return (
         <div className='align-items-center my-2'>
