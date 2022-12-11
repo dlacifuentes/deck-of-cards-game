@@ -103,6 +103,7 @@ const GameProvider = ({ children }) => {
 			const terna = pares.find(
 				(card) => card.code[0] === cards[0].code[0]
 			);
+			console.log("t")
 
 			if(terna != null && ternas.length < 6){
 				// formar pares
@@ -130,6 +131,7 @@ const GameProvider = ({ children }) => {
 				setTernas([...ternas, ...matches])
 
 			}else{
+				
 				console.log("formar pares")
 				console.log(unique)
 				const par = unique.find(
@@ -162,12 +164,6 @@ const GameProvider = ({ children }) => {
 
 			}
 		}
-
-			console.log(cuartas.length)
-			console.log(pares.length)
-			console.log(ternas.length)
-			console.log(unique.length)
-        
 
 	};
 
