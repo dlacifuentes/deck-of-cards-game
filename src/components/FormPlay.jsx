@@ -5,7 +5,8 @@ import {useEffect } from 'react';
 // import EndGame from '../components/EndGame';
 
 const FormPlay = () => {
-	const { requestCards, requestCard, requestRemaining, remaining, setEndGame } = useGame();
+	const { requestCards, requestCard, requestRemaining, remaining, setEndGame,
+		findCuartas } = useGame();
 	
 	useEffect(() => {
 		const requestCard = async () => {
@@ -17,6 +18,7 @@ const FormPlay = () => {
 	
 	const handleClick = async () => {
 		requestRemaining();
+		findCuartas();
 
 		if(remaining > 0) {
 			await requestCard();
@@ -26,6 +28,8 @@ const FormPlay = () => {
 		}
 		
 	};
+
+
 
 	return (
 		<Stack gap={2} className='col-md-5 mx-auto'>
