@@ -1,14 +1,9 @@
 import useGame from '../hooks/useGame';
-import {useEffect } from 'react';
 
 const ListCardPlayerOne = () => {
 
     const { cardPlayerOne, currentCards, setCuartas, setTernas, setPares,
             pares, ternas, cuartas, unique, setUnique  } = useGame();
-
-    useEffect(() => {
-        findCuartas();
-    }, [])
 
     const findCuartas = () => { 
         const cards = currentCards
@@ -43,7 +38,8 @@ const ListCardPlayerOne = () => {
                 else {
                     console.log("ingreso unico")
                     console.log(matches)
-                    setUnique([...unique, ...matches]) 
+                    setUnique([...unique, ...matches])
+                    console.log("add") 
                 }
         
                 return null
@@ -52,9 +48,7 @@ const ListCardPlayerOne = () => {
 
     }
 
-   
-
-  //  findCuartas()
+    findCuartas()
 
     return (
         <div className='align-items-center my-2'>
