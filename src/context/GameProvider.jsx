@@ -69,6 +69,13 @@ const GameProvider = ({ children }) => {
 		console.log(cards)
 		setCardPlayerOne([cards[0]]);
 		setCardPlayerTwo([cards[1]]);
+
+		const terna = pares.find(
+			(card) => card.code[0] === cards[0].code[0]
+		);
+        console.log("coincidencia")
+		console.log(terna)
+
 	};
 
 	// Obtener cartas restantes
