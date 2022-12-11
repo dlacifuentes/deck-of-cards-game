@@ -2,9 +2,6 @@ import useGame from '../hooks/useGame';
 
 const ListCardPlayerOne = () => {
 
-<<<<<<< HEAD
-    const { cardPlayerOne } = useGame();
-=======
     const { cardPlayerOne, currentCards, setCuartas, setTernas, setPares,
             pares, ternas, cuartas, unique, setUnique  } = useGame();
 
@@ -65,7 +62,6 @@ const ListCardPlayerOne = () => {
             }
         
             findCuartas()
->>>>>>> parent of 534c3a9 (modificacióm array)
 
     return (
         <div className='align-items-center my-2'>

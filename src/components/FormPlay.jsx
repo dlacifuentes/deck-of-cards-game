@@ -5,8 +5,7 @@ import {useEffect } from 'react';
 // import EndGame from '../components/EndGame';
 
 const FormPlay = () => {
-	const { requestCards, requestCard, requestRemaining, remaining, setEndGame,
-		findCuartas } = useGame();
+	const { requestCards, requestCard, requestRemaining, remaining, setEndGame } = useGame();
 	
 	useEffect(() => {
 		const requestCard = async () => {
@@ -18,7 +17,6 @@ const FormPlay = () => {
 	
 	const handleClick = async () => {
 		requestRemaining();
-		findCuartas();
 
 		if(remaining > 0) {
 			await requestCard();

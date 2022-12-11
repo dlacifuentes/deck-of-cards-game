@@ -17,7 +17,7 @@ const GameProvider = ({ children }) => {
 
 	// Cartas en juego
 	const [currentCards, setCurrentCards] = useState([]);
-	const [moveCards, setMoveCards] = useState([]);
+	// const [moveCards, setMoveCards] = useState([]);
 
 	// Nuevas cartas
 	const [cardPlayerOne, setCardPlayerOne] = useState([]);
@@ -59,69 +59,11 @@ const GameProvider = ({ children }) => {
 		setPlayerTwo({ ...playerTwo, cards: [...playerTwo.cards, ...cards2] });
 
 		setCurrentCards([...cards1]);
-		setMoveCards([...card1]);
+	//	setMoveCards([...cards1]);
 		// console.log('current cards')
 		// console.log(currentCards)  
 
 	};
-
-	const findCuartas = () => { 
-		const cards = currentCards
-		const c = [];
-		const t = [];
-		const p = [];
-		const u = [];
-
-	/*    cards.sort((card1, card2) => {
-			if(card1.code[1] < card2.code[1] ) return -1
-			else if (card1.code[1] > card2.code[1]) return 1;
-			else return 0
-		}); */
-
-			cards.map((card) => {
-				const first = cards[0].code
-
-				const matches = cards
-				.filter((card) => card.code[0] === first[0])
-				.map((card) => {
-					// index de elemento a eliminar
-					const p = cards.map(card1 => card1.code).indexOf(card.code)
-
-					// eliminación del elemento en el array cards
-					cards.splice(p, 1);
-					return card  // retorna la carta
-				});
-				
-				console.log(matches)
-				console.log("longitud " + matches.length)
-				if (matches.length === 4){
-					console.log("cuarta")
-					c.push(...matches)
-					console.log(c)
-					setCuartas([...cuartas, ...matches])}
-				else if( matches.length === 3){
-					console.log("terna")
-					t.push(...matches)
-					console.log(t)
-					setTernas([...ternas, ...matches])}
-				else if( matches.length === 2 ){
-					console.log("par")
-					p.push(...matches)
-					console.log(p)
-					setPares([...pares, ...matches])}
-				else{
-					u.push(...matches)
-					console.log("ingreso unico")
-					setUnique([...unique, ...matches])
-					console.log(u)
-				}
-		
-				return null
-			}) 
-
-	}
-
-	// findCuartas()
 
 
 	// Obtener nuevas cartas para ambos jugadores
@@ -138,7 +80,7 @@ const GameProvider = ({ children }) => {
 		);
 
 		if(cuarta!= null && cuartas.length === 0){
-			//formar cuartas
+			// formar cuartas
 			const cardsTerna = ternas;
 				
 			const matches = cardsTerna
@@ -210,7 +152,7 @@ const GameProvider = ({ children }) => {
 					const first = unicos.shift();
 					console.log("item a eliminar")
 					console.log(first)
-					//console.log(cardsOne)
+					// console.log(cardsOne)
 
 					const p = cardsOne.map(card => card.code).indexOf(first.code)
 					console.log(p)
@@ -232,7 +174,7 @@ const GameProvider = ({ children }) => {
 				);
 	
 				if(par != null){
-					//formar pares
+					// formar pares
 					const cardsU = unique;
 					
 					const matches = cardsU
@@ -256,7 +198,7 @@ const GameProvider = ({ children }) => {
 						const first = unicos.shift();
 						console.log("item a eliminar")
 						console.log(first)
-						//console.log(cardsOne)
+						// console.log(cardsOne)
 	
 						const p = cardsOne.map(card => card.code).indexOf(first.code)
 						console.log(p)
@@ -307,7 +249,6 @@ const GameProvider = ({ children }) => {
 				pares,
 				setUnique,
 				unique,
-				findCuartas,
 			}}
 		>
 			{children}
