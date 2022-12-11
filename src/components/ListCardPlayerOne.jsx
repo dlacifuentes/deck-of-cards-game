@@ -50,7 +50,6 @@ const ListCardPlayerOne = () => {
 
     useEffect(() => {
         findCuartas()
-    .catch(console.error);
     }, [])
 
   //  findCuartas()
