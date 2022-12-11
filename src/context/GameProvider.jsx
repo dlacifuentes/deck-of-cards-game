@@ -96,14 +96,11 @@ const GameProvider = ({ children }) => {
                 });	
 			
 			matches.push(cards[0])
+			console.log(matches)
+			// console.log(cards[0])
 			setTernas([...ternas, ...matches])
-		
 
 		}
-		console.log(cuartas.length)
-			console.log(pares.length)
-			console.log(ternas.length)
-			console.log(unique.length)
         
 
 	};
