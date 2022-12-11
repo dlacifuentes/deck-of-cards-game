@@ -17,6 +17,7 @@ const GameProvider = ({ children }) => {
 
 	// Cartas en juego
 	const [currentCards, setCurrentCards] = useState([]);
+	const [moveCards, setMoveCards] = useState([]);
 
 	// Nuevas cartas
 	const [cardPlayerOne, setCardPlayerOne] = useState([]);
@@ -58,6 +59,7 @@ const GameProvider = ({ children }) => {
 		setPlayerTwo({ ...playerTwo, cards: [...playerTwo.cards, ...cards2] });
 
 		setCurrentCards([...cards1]);
+		setMoveCards([...card1]);
 		// console.log('current cards')
 		// console.log(currentCards)  
 
@@ -70,7 +72,7 @@ const GameProvider = ({ children }) => {
 		setCardPlayerOne([cards[0]]);
 		setCardPlayerTwo([cards[1]]);
 
-		console.log(unique)
+		const cardsOne = playerOne.cards
 
 		const cuarta = ternas.find(
 			(card) => card.code[0] === cards[0].code[0]
@@ -84,7 +86,7 @@ const GameProvider = ({ children }) => {
 				.filter((card) => card.code[0] === cuarta.code[0])
 				.map((card) => {						
 					// index de elemento a eliminar
-					const p = cardsTerna.map(card1 => card1.code).indexOf(card.code)
+					const p = cardsTerna.map(card => card.cards.code).indexOf(card.code)
 					
 					// eliminación del elemento en el array 
 					cardsTerna.splice(p, 1);
@@ -95,10 +97,20 @@ const GameProvider = ({ children }) => {
 				matches.push(cards[0])
 				setCuartas([...cuartas, ...matches])
 
-				let primerItem = setUnique((unique) => unique.shift());
-					console.log("item a eliminar")
-					console.log(primerItem)
-					console.log(unique)
+				const unicos = unique;
+
+				const first = unicos.shift();
+				console.log("item a eliminar")
+				console.log(first)
+				console.log(cardsOne)
+
+				const p = cardsOne.map(card => card.code).indexOf(first.code)
+				console.log(p)
+
+			/*	setPlayerOne({ ...playerOne, cards: [playerOne.cards
+					.map(card => card.code === cards[0].code ? first : card) ]}) */
+				
+				// setUnique(...unicos)
 
 		}else{
 			const terna = pares.find(
@@ -124,10 +136,27 @@ const GameProvider = ({ children }) => {
 				matches.push(cards[0])
 				setTernas([...ternas, ...matches])
 
-				let primerItem = setUnique((unique) => unique.shift());
+			/*	let primerItem = setUnique((unique) => unique.shift());
 					console.log("item a eliminar")
 					console.log(primerItem)
-					console.log(unique)
+					console.log(unique) */
+					const unicos = unique;
+
+				console.log(unique)
+				console.log(unicos)
+
+				const first = unicos.shift();
+				console.log("item a eliminar")
+				console.log(first)
+				console.log(cardsOne)
+
+				const p = cardsOne.map(card => card.code).indexOf(first.code)
+				console.log(p)
+
+			/*	setPlayerOne({ ...playerOne, cards: [playerOne.cards
+					.map(card => card.code === cards[0].code ? first : card) ]}) */
+				
+				// setUnique(...unicos)
 
 			}else{
 
@@ -153,10 +182,27 @@ const GameProvider = ({ children }) => {
 					matches.push(cards[0])
 					setPares([...pares, ...matches])
 
-					let primerItem = setUnique((unique) => unique.shift());
+				/*	let primerItem = setUnique((unique) => unique.shift());
 					console.log("item a eliminar")
 					console.log(primerItem)
-					console.log(unique)
+					console.log(unique) */
+					const unicos = unique;
+
+				console.log(unique)
+				console.log(unicos)
+
+				const first = unicos.shift();
+				console.log("item a eliminar")
+				console.log(first)
+				console.log(cardsOne)
+
+				const p = cardsOne.map(card => card.code).indexOf(first.code)
+				console.log(p)
+
+			/*	setPlayerOne({ ...playerOne, cards: [playerOne.cards
+					.map(card => card.code === cards[0].code ? first : card) ]}) */
+				
+				// setUnique(...unicos)
 
 				}
 			}
