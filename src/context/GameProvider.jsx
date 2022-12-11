@@ -75,7 +75,7 @@ const GameProvider = ({ children }) => {
 		);
 
 		if(cuarta!= null && cuartas.length === 0){
-
+			//formar cuartas
 			const cardsTerna = ternas;
 				
 			const matches = cardsTerna
@@ -96,8 +96,7 @@ const GameProvider = ({ children }) => {
 			});	
 				
 				matches.push(cards[0])
-			//	console.log(matches)
-				// console.log(cards[0])
+	
 				setCuartas([...cuartas, ...matches])
 
 		}else{
@@ -106,9 +105,9 @@ const GameProvider = ({ children }) => {
 			);
 
 			if(terna != null && ternas.length < 6){
+				// formar pares
 				const cardsPar = pares;
-			//	const cardsTernas;
-				
+
 				const matches = cardsPar
 					.filter((card) => card.code[0] === terna.code[0])
 					.map((card) => {
@@ -127,8 +126,7 @@ const GameProvider = ({ children }) => {
 					});	
 				
 				matches.push(cards[0])
-			//	console.log(matches)
-				// console.log(cards[0])
+
 				setTernas([...ternas, ...matches])
 
 			}else{
@@ -138,8 +136,8 @@ const GameProvider = ({ children }) => {
 				);
 	
 				if(par != null){
+					//formar pares
 					const cardsU = unique;
-				//	const cardsTernas;
 					
 					const matches = cardsU
 						.filter((card) => card.code[0] === par.code[0])
@@ -159,8 +157,6 @@ const GameProvider = ({ children }) => {
 						});	
 					
 					matches.push(cards[0])
-				//	console.log(matches)
-					// console.log(cards[0])
 					setUnique([...unique, ...matches])
 
 			}
