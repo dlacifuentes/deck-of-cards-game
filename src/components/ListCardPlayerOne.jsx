@@ -32,28 +32,28 @@ const ListCardPlayerOne = () => {
                             return card  // retorna la carta
                         });
                         
-                       // console.log(matches)
-                        console.log("longitud " + matches.length)
+                        console.log(matches)
+                       // console.log("longitud " + matches.length)
                         if (matches.length === 4){
                             console.log("cuarta")
-                            c.push(...matches)
-                            console.log(c)
+                          //  c.push(...matches)
+                           // console.log(c)
                             setCuartas([...cuartas, ...matches])}
                         else if( matches.length === 3){
                             console.log("terna")
-                            t.push(...matches)
-                            console.log(t)
+                          //  t.push(...matches)
+                           // console.log(t)
                             setTernas([...ternas, ...matches])}
                         else if( matches.length === 2 ){
                             console.log("par")
-                            p.push(...matches)
-                            console.log(p)
+                        //    p.push(...matches)
+                         //   console.log(p)
                             setPares([...pares, ...matches])}
                         else{
-                            u.push(...matches)
+                         //   u.push(...matches)
                             console.log("ingreso unico")
                             setUnique([...unique, ...matches])
-                            console.log(u)
+                         //   console.log(u)
                         }
                 
                         return null
