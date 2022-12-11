@@ -73,8 +73,33 @@ const GameProvider = ({ children }) => {
 		const terna = pares.find(
 			(card) => card.code[0] === cards[0].code[0]
 		);
-        console.log("coincidencia")
-		console.log(terna)
+
+		if(terna != null){
+			const cardsPar = pares;
+		//	const cardsTernas;
+			
+			const matches = cardsPar
+                .filter((card) => card.code[0] === terna.code[0])
+                .map((card) => {
+					console.log("card par")
+					console.log(card)
+					
+                    // index de elemento a eliminar
+                    const p = cardsPar.map(card1 => card1.code).indexOf(card.code)
+                    // eliminación del elemento en el array 
+                    cardsPar.splice(p, 1);
+
+					console.log("card par")
+					console.log(cardsPar)
+
+                    return card 
+                });	
+
+			console.log("coincidencia")
+			console.log(terna)
+			console.log(matches)
+		}
+        
 
 	};
 

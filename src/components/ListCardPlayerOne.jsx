@@ -27,6 +27,7 @@ const ListCardPlayerOne = () => {
                     cards.splice(p, 1);
                     return card  // retorna la carta
                 });
+                
                 console.log(matches)
                 if (matches.length === 4)
                     setCuartas([...cuartas, ...matches])
