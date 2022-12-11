@@ -89,14 +89,14 @@ const GameProvider = ({ children }) => {
 					// eliminación del elemento en el array 
 					cardsTerna.splice(p, 1);
 
-					console.log("card terna")
+			//		console.log("card terna")
 					console.log(cardsTerna)
 
 					return card 
 			});	
 				
 				matches.push(cards[0])
-	
+				console.log("formar cuartas")
 				setCuartas([...cuartas, ...matches])
 
 		}else{
@@ -126,11 +126,12 @@ const GameProvider = ({ children }) => {
 					});	
 				
 				matches.push(cards[0])
-
+				console.log("formar ternas")
 				setTernas([...ternas, ...matches])
 
 			}else{
-
+				console.log("formar pares")
+				console.log(unique)
 				const par = unique.find(
 					(card) => card.code[0] === cards[0].code[0]
 				);
@@ -157,7 +158,7 @@ const GameProvider = ({ children }) => {
 						});	
 					
 					matches.push(cards[0])
-					setUnique([...unique, ...matches])
+					setPares([...pares, ...matches])
 
 			}
 		}
