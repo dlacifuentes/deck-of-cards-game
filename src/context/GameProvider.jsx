@@ -94,11 +94,11 @@ const GameProvider = ({ children }) => {
 
                     return card 
                 });	
-
+			
+			matches.push(cards[0])
 			console.log(matches)
-			console.log(cards[0])
+			// console.log(cards[0])
 			setTernas([...ternas, ...matches])
-			setTernas([...ternas, cards[0]])
 
 		}
         
