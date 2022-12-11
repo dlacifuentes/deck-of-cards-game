@@ -28,11 +28,17 @@ const GameProvider = ({ children }) => {
 	// const [win, setWin] = useState(false);
 	// const [winName, setWinName] = useState('');
 	
-	// Cuartas o escaleras
+	// array cuartas
 	const [cuartas, setCuartas] = useState([]);
 
-	// ternas
+	// array ternas
 	const [ternas, setTernas] = useState([]);
+
+	// array pares
+	const [pares, setPares] = useState([]);
+
+	// array uniques
+	const [unique, setUnique] = useState([]);
 
 	// mostrar mensaje de finalización del juego - sin ganador
 	const [endGame, setEndGame] = useState(false);
@@ -90,6 +96,11 @@ const GameProvider = ({ children }) => {
 				setCuartas,
 				currentCards,
 				setTernas,
+				setPares,
+				ternas,
+				pares,
+				setUnique,
+				unique
 			}}
 		>
 			{children}

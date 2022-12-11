@@ -4,6 +4,7 @@ import Col from 'react-bootstrap/Col';
 import FormPlay from '../components/FormPlay';
 import ListCards from '../components/ListCards';
 import EndGame from '../components/EndGame';
+import ViewComponents from '../components/ViewComponents';
 
 const GamePage = () => {
 	return (
@@ -20,6 +21,11 @@ const GamePage = () => {
 				<Row>
 					<Col>
 						<EndGame />
+					</Col>
+				</Row>
+				<Row>
+					<Col>
+						<ViewComponents />
 					</Col>
 				</Row>
 			</Container>
