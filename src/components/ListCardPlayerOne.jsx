@@ -34,16 +34,16 @@ const ListCardPlayerOne = () => {
                 
                 console.log(matches)
                 if (matches.length === 4){
-                    c.push(matches)
+                    c.push(...matches)
                     setCuartas([...cuartas, ...matches])}
                 else if( matches.length === 3){
-                    t.push(matches)
+                    t.push(...matches)
                     setTernas([...ternas, ...matches])}
                 else if( matches.length === 2 ){
-                    p.push(matches)
+                    p.push(...matches)
                     setPares([...pares, ...matches])}
                 else{
-                    u.push(matches)
+                    u.push(...matches)
                     console.log("ingreso unico")
                     setUnique([...unique, ...matches]) 
                 }
