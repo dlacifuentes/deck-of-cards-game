@@ -32,7 +32,7 @@ const ListCardPlayerOne = () => {
                             return card  // retorna la carta
                         });
                         
-                       // console.log(matches)
+                        console.log(matches)
                         console.log("longitud " + matches.length)
                         if (matches.length === 4){
                             console.log("cuarta")
