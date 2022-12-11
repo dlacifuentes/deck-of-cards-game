@@ -66,9 +66,11 @@ const GameProvider = ({ children }) => {
 	// Obtener nuevas cartas para ambos jugadores
 	const requestCard = async () => {
 		const cards = await DeckOfCardsAPI.getNewCards(idGame);
-		console.log(cards)
+	//	console.log(cards)
 		setCardPlayerOne([cards[0]]);
 		setCardPlayerTwo([cards[1]]);
+
+		console.log(unique)
 
 		const cuarta = ternas.find(
 			(card) => card.code[0] === cards[0].code[0]
