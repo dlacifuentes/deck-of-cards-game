@@ -33,6 +33,7 @@ const ListCardPlayerOne = () => {
                 else if( matches.length === 2 )
                     setPares([...pares, ...matches])
                 else
+                    console.log("ingreso unico")
                     setUnique([...unique, ...matches]) 
         
                 return null
