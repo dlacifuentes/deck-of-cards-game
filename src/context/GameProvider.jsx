@@ -131,7 +131,7 @@ const GameProvider = ({ children }) => {
 				setTernas([...ternas, ...matches])
 
 			}else{
-				
+
 				console.log("formar pares")
 				console.log(unique)
 				const par = unique.find(
@@ -162,9 +162,9 @@ const GameProvider = ({ children }) => {
 					matches.push(cards[0])
 					setPares([...pares, ...matches])
 
+				}
 			}
 		}
-
 	};
 
 	// Obtener cartas restantes
