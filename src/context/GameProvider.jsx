@@ -70,36 +70,69 @@ const GameProvider = ({ children }) => {
 		setCardPlayerOne([cards[0]]);
 		setCardPlayerTwo([cards[1]]);
 
-		const terna = pares.find(
+		const cuarta = ternas.find(
 			(card) => card.code[0] === cards[0].code[0]
 		);
 
-		if(terna != null){
-			const cardsPar = pares;
-		//	const cardsTernas;
-			
-			const matches = cardsPar
-                .filter((card) => card.code[0] === terna.code[0])
-                .map((card) => {
-					console.log("card par")
+		if(cuarta!= null){
+
+			const cardsTerna = ternas;
+				
+			const matches = cardsTerna
+				.filter((card) => card.code[0] === cuarta.code[0])
+				.map((card) => {
+					console.log("card terna")
 					console.log(card)
-					
-                    // index de elemento a eliminar
-                    const p = cardsPar.map(card1 => card1.code).indexOf(card.code)
-                    // eliminación del elemento en el array 
-                    cardsPar.splice(p, 1);
+						
+					// index de elemento a eliminar
+					const p = cardsTerna.map(card1 => card1.code).indexOf(card.code)
+					// eliminación del elemento en el array 
+					cardsTerna.splice(p, 1);
 
-					console.log("card par")
-					console.log(cardsPar)
+					console.log("card terna")
+					console.log(cardsTerna)
 
-                    return card 
-                });	
-			
-			matches.push(cards[0])
-		//	console.log(matches)
-			// console.log(cards[0])
-			setTernas([...ternas, ...matches])
+					return card 
+			});	
+				
+				matches.push(cards[0])
+			//	console.log(matches)
+				// console.log(cards[0])
+				setCuartas([...cuartas, ...matches])
 
+		}else{
+
+			const terna = pares.find(
+				(card) => card.code[0] === cards[0].code[0]
+			);
+
+			if(terna != null){
+				const cardsPar = pares;
+			//	const cardsTernas;
+				
+				const matches = cardsPar
+					.filter((card) => card.code[0] === terna.code[0])
+					.map((card) => {
+						console.log("card par")
+						console.log(card)
+						
+						// index de elemento a eliminar
+						const p = cardsPar.map(card1 => card1.code).indexOf(card.code)
+						// eliminación del elemento en el array 
+						cardsPar.splice(p, 1);
+
+						console.log("card par")
+						console.log(cardsPar)
+
+						return card 
+					});	
+				
+				matches.push(cards[0])
+			//	console.log(matches)
+				// console.log(cards[0])
+				setTernas([...ternas, ...matches])
+
+			}
 		}
 
 			console.log(cuartas.length)
