@@ -32,9 +32,10 @@ const ListCardPlayerOne = () => {
                     setTernas([...ternas, ...matches])
                 else if( matches.length === 2 )
                     setPares([...pares, ...matches])
-                else
+                else{
                     console.log("ingreso unico")
                     setUnique([...unique, ...matches]) 
+                }
         
                 return null
             })
