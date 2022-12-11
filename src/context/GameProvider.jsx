@@ -80,33 +80,28 @@ const GameProvider = ({ children }) => {
 				
 			const matches = cardsTerna
 				.filter((card) => card.code[0] === cuarta.code[0])
-				.map((card) => {
-					console.log("card terna")
-					console.log(card)
-						
+				.map((card) => {						
 					// index de elemento a eliminar
 					const p = cardsTerna.map(card1 => card1.code).indexOf(card.code)
+					
 					// eliminación del elemento en el array 
 					cardsTerna.splice(p, 1);
-
-			//		console.log("card terna")
-					console.log(cardsTerna)
 
 					return card 
 			});	
 				
 				matches.push(cards[0])
-				console.log("formar cuarta")
 				setCuartas([...cuartas, ...matches])
 
 				let primerItem = setUnique((unique) => unique.shift());
-				console.log(primerItem)
+					console.log("item a eliminar")
+					console.log(primerItem)
+					console.log(unique)
 
 		}else{
 			const terna = pares.find(
 				(card) => card.code[0] === cards[0].code[0]
 			);
-			console.log("t")
 
 			if(terna != null && ternas.length < 6){
 				// formar pares
@@ -114,29 +109,26 @@ const GameProvider = ({ children }) => {
 
 				const matches = cardsPar
 					.filter((card) => card.code[0] === terna.code[0])
-					.map((card) => {
-						console.log("card par")
-						console.log(card)
-						
+					.map((card) => {			
 						// index de elemento a eliminar
 						const p = cardsPar.map(card1 => card1.code).indexOf(card.code)
+
 						// eliminación del elemento en el array 
 						cardsPar.splice(p, 1);
-
-						console.log("card par")
-						console.log(cardsPar)
 
 						return card 
 					});	
 				
 				matches.push(cards[0])
-				console.log("formar ternas")
 				setTernas([...ternas, ...matches])
+
+				let primerItem = setUnique((unique) => unique.shift());
+					console.log("item a eliminar")
+					console.log(primerItem)
+					console.log(unique)
 
 			}else{
 
-				console.log("formar pares")
-				console.log(unique)
 				const par = unique.find(
 					(card) => card.code[0] === cards[0].code[0]
 				);
@@ -147,23 +139,22 @@ const GameProvider = ({ children }) => {
 					
 					const matches = cardsU
 						.filter((card) => card.code[0] === par.code[0])
-						.map((card) => {
-							console.log("card unica")
-							console.log(card)
-							
+						.map((card) => {					
 							// index de elemento a eliminar
 							const p = cardsU.map(card1 => card1.code).indexOf(card.code)
+
 							// eliminación del elemento en el array 
-							cardsU.splice(p, 1);
-	
-							console.log("card par")
-							console.log(cardsU)
-	
+							cardsU.splice(p, 1);	
 							return card 
 						});	
 					
 					matches.push(cards[0])
 					setPares([...pares, ...matches])
+
+					let primerItem = setUnique((unique) => unique.shift());
+					console.log("item a eliminar")
+					console.log(primerItem)
+					console.log(unique)
 
 				}
 			}
