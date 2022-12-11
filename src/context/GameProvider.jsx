@@ -101,12 +101,11 @@ const GameProvider = ({ children }) => {
 				setCuartas([...cuartas, ...matches])
 
 		}else{
-
 			const terna = pares.find(
 				(card) => card.code[0] === cards[0].code[0]
 			);
 
-			if(terna != null){
+			if(terna != null && ternas.length < 6){
 				const cardsPar = pares;
 			//	const cardsTernas;
 				
@@ -131,6 +130,38 @@ const GameProvider = ({ children }) => {
 			//	console.log(matches)
 				// console.log(cards[0])
 				setTernas([...ternas, ...matches])
+
+			}else{
+
+				const par = unique.find(
+					(card) => card.code[0] === cards[0].code[0]
+				);
+	
+				if(par != null){
+					const cardsU = unique;
+				//	const cardsTernas;
+					
+					const matches = cardsU
+						.filter((card) => card.code[0] === par.code[0])
+						.map((card) => {
+							console.log("card unica")
+							console.log(card)
+							
+							// index de elemento a eliminar
+							const p = cardsU.map(card1 => card1.code).indexOf(card.code)
+							// eliminación del elemento en el array 
+							cardsU.splice(p, 1);
+	
+							console.log("card par")
+							console.log(cardsU)
+	
+							return card 
+						});	
+					
+					matches.push(cards[0])
+				//	console.log(matches)
+					// console.log(cards[0])
+					setUnique([...unique, ...matches])
 
 			}
 		}
