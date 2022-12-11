@@ -73,6 +73,8 @@ const GameProvider = ({ children }) => {
 		setCardPlayerTwo([cards[1]]);
 
 		const cardsOne = playerOne.cards
+		const c = playerOne
+		console.log(c.cards[5])
 
 		const cuarta = ternas.find(
 			(card) => card.code[0] === cards[0].code[0]
@@ -192,9 +194,11 @@ const GameProvider = ({ children }) => {
 	
 						const p = cardsOne.map(card => card.code).indexOf(first.code)
 						console.log(p)
-	
-					/*	setPlayerOne({ ...playerOne, cards: [playerOne.cards
-							.map(card => card.code === cards[0].code ? first : card) ]}) */
+
+						cardsOne.cards[p] = cards[0]
+					
+					/*	setPlayerOne({ ...playerOne, cards: [...playerOne.cards,
+							[p]: ...cards[0] ]}) */
 						
 						// setUnique(...unicos)
 					}
