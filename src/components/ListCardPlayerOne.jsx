@@ -33,28 +33,27 @@ const ListCardPlayerOne = () => {
                 });
                 
                 console.log(matches)
+                console.log("---")
                 if (matches.length === 4){
                     c.push(...matches)
-                    console.log(cuartas.length)
+                    console.log(c)
                    // setCuartas([...cuartas, ...matches])
-                    console.log(cuartas.length)
                 }
                 else if( matches.length === 3){
                     t.push(...matches)
-                    console.log(ternas.length)
+                    console.log(t)
                   //  setTernas([...ternas, ...matches])
-                    console.log(ternas.length)}
+                }
                 else if( matches.length === 2 ){
                     p.push(...matches)
-                    console.log(pares.length)
+                    console.log(p)
                  //   setPares([...pares, ...matches])
-                    console.log(pares.length)}
+                }
                 else{
                     u.push(...matches)
-                    console.log("ingreso unico")
-                    console.log(unique.length)
+                  // console.log("ingreso unico")
+                    console.log(u)
                 //    setUnique([...unique, ...matches]) 
-                    console.log(unique.length)
                 }
         
                 return null
