@@ -6,6 +6,10 @@ const ListCardPlayerOne = () => {
     const { cardPlayerOne, currentCards, setCuartas, setTernas, setPares,
             pares, ternas, cuartas, unique, setUnique  } = useGame();
 
+    useEffect(() => {
+        findCuartas();
+    }, [])
+
     const findCuartas = () => { 
         const cards = currentCards
 
@@ -48,9 +52,7 @@ const ListCardPlayerOne = () => {
 
     }
 
-    useEffect(() => {
-        findCuartas()
-    }, [])
+   
 
   //  findCuartas()
 
