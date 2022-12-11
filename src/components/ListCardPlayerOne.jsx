@@ -1,4 +1,5 @@
 import useGame from '../hooks/useGame';
+import {useEffect } from 'react';
 
 const ListCardPlayerOne = () => {
 
@@ -47,7 +48,12 @@ const ListCardPlayerOne = () => {
 
     }
 
-    findCuartas()
+    useEffect(() => {
+        findCuartas()
+    .catch(console.error);
+    }, [])
+
+  //  findCuartas()
 
     return (
         <div className='align-items-center my-2'>
