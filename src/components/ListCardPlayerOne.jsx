@@ -51,13 +51,6 @@ const ListCardPlayerOne = () => {
                 return null
             }) 
 
-            console.log("arrays")
-            console.log(c)
-            console.log(t)
-            console.log(p)
-            console.log(u)
-
-
     }
 
     findCuartas()
