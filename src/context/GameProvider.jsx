@@ -74,7 +74,7 @@ const GameProvider = ({ children }) => {
 			(card) => card.code[0] === cards[0].code[0]
 		);
 
-		if(cuarta!= null){
+		if(cuarta!= null && cuartas.length === 0){
 
 			const cardsTerna = ternas;
 				
