@@ -73,7 +73,9 @@ const GameProvider = ({ children }) => {
 		setCardPlayerOne([cards[0]]);
 		setCardPlayerTwo([cards[1]]);
 
-		const cardsOne = playerOne.cards
+		const cardsOne = playerOne.cards;
+		const unicos = unique;
+		const c = playerOne;
 
 		const cuarta = ternas.find(
 			(card) => card.code[0] === cards[0].code[0]
@@ -98,25 +100,20 @@ const GameProvider = ({ children }) => {
 				matches.push(cards[0])
 				setCuartas([...cuartas, ...matches])
 
-				if(unique != null){
-
-					const unicos = unique;
+				if(unique.length === 0){
 
 					const first = unicos.shift();
 					console.log("item a eliminar")
 					console.log(first)
-					
-				//	console.log(cardsOne)
 
 					const p = cardsOne.map(card => card.code).indexOf(first.code)
 					console.log(p)
 
-					const c = playerOne
 					c.cards[p] = cards[0]
 					console.log(c)
-
-				/*	setPlayerOne({ ...playerOne, cards: [...playerOne.cards
-						.map(card => card.code === cards[0].code ? first : card) ]}) */
+				
+				/*	setPlayerOne({ ...playerOne, cards: [...playerOne.cards,
+						[p]: ...cards[0] ]}) */
 					
 					// setUnique(...unicos)
 				}
@@ -145,24 +142,20 @@ const GameProvider = ({ children }) => {
 				matches.push(cards[0])
 				setTernas([...ternas, ...matches])
 
-				if(unique != null){
-
-					const unicos = unique;
+				if(unique.length === 0){
 
 					const first = unicos.shift();
 					console.log("item a eliminar")
 					console.log(first)
-					// console.log(cardsOne)
 
 					const p = cardsOne.map(card => card.code).indexOf(first.code)
 					console.log(p)
 
-					const c = playerOne
 					c.cards[p] = cards[0]
 					console.log(c)
-
-				/*	setPlayerOne({ ...playerOne, cards: [playerOne.cards
-						.map(card => card.code === cards[0].code ? first : card) ]}) */
+				
+				/*	setPlayerOne({ ...playerOne, cards: [...playerOne.cards,
+						[p]: ...cards[0] ]}) */
 					
 					// setUnique(...unicos)
 				}
@@ -198,12 +191,10 @@ const GameProvider = ({ children }) => {
 						const first = unicos.shift();
 						console.log("item a eliminar")
 						console.log(first)
-						// console.log(cardsOne)
 	
 						const p = cardsOne.map(card => card.code).indexOf(first.code)
 						console.log(p)
 
-						const c = playerOne
 						c.cards[p] = cards[0]
 						console.log(c)
 					
