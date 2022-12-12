@@ -191,7 +191,7 @@ const GameProvider = ({ children }) => {
 					matches.push(cards[0])
 					setPares([...pares, ...matches])
 
-					if(unique != null){
+					if(unique.length === 0){
 
 						const unicos = unique;
 	
