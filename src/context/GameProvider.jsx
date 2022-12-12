@@ -25,9 +25,6 @@ const GameProvider = ({ children }) => {
 
 	// cartas restantes en la baraja
 	const [remaining, setRemaining] = useState(32);
-
-	// const [win, setWin] = useState(false);
-	// const [winName, setWinName] = useState('');
 	
 	// array cuartas
 	const [cuartas, setCuartas] = useState([]);
@@ -40,6 +37,10 @@ const GameProvider = ({ children }) => {
 
 	// array uniques
 	const [unique, setUnique] = useState([]);
+
+	// configuración ganador
+	const [win, setWin] = useState(false);
+	const [winName, setWinName] = useState('');
 
 	// mostrar mensaje de finalización del juego - sin ganador
 	const [endGame, setEndGame] = useState(false);
@@ -209,6 +210,11 @@ const GameProvider = ({ children }) => {
 			}
 		}
 
+		if(cuartas.length === 1 && ternas.length === 6 ) {
+			setWin(true);
+			setWinName(playerOne.name);
+		}
+
 
 	};
 
@@ -243,6 +249,9 @@ const GameProvider = ({ children }) => {
 				pares,
 				setUnique,
 				unique,
+				win,
+				winName,
+				setWinName,
 			}}
 		>
 			{children}
