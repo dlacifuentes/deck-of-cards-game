@@ -100,7 +100,7 @@ const GameProvider = ({ children }) => {
 				matches.push(cards[0])
 				setCuartas([...cuartas, ...matches])
 
-				if(unique.length === 0){
+				if(unique.length !== 0){
 
 					const first = unicos.shift();
 					console.log("item a eliminar")
@@ -142,7 +142,7 @@ const GameProvider = ({ children }) => {
 				matches.push(cards[0])
 				setTernas([...ternas, ...matches])
 
-				if(unique.length === 0){
+				if(unique.length !== 0){
 
 					const first = unicos.shift();
 					console.log("item a eliminar")
@@ -184,7 +184,7 @@ const GameProvider = ({ children }) => {
 					matches.push(cards[0])
 					setPares([...pares, ...matches])
 
-					if(unique.length === 0){
+					if(unique.length !== 0){
 
 						const unicos = unique;
 	
