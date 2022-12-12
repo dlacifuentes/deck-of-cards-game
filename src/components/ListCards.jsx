@@ -14,6 +14,9 @@ const ListCards = () => {
 			
 				<Row>
 					<Col sm={11}>
+					{/* <div className='remaining'>
+					<h3>Remainig Cards: {remaining}</h3>
+					</div> */}
 					<div className='align-items-center my-2'>
 						<h4>Player {playerOne.name}</h4>
 						<p>Cards obtained</p>

@@ -9,11 +9,18 @@ const getIdGame = async () => {
 };
 
 // obtener cartas iniciales
-const getCards = async deckId => {
+const initialCards = async deckId => {
 	const url = `${cardsApi}/${deckId}/draw/?count=10`;
 	const res = await fetch(url);
 	const data = await res.json();
 	return data?.cards;
+};
+
+const getCards = async deckId => {
+	const url =  `${cardsApi}/${deckId}/draw/?count=10`;
+	const res = await fetch(url);
+	const data = await res.json();
+	return data;
 };
 
 // obtener nuevas cartas
@@ -34,9 +41,10 @@ const getRemaining = async deckId => {
 
 const DeckOfCardsAPI = {
 	getIdGame,
+	initialCards,
 	getCards,
-	getNewCards,
-	getRemaining,	
+	getRemaining,
+	getNewCards,	
 };
 
 export default DeckOfCardsAPI;

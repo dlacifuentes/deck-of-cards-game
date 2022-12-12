@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import { useState } from 'react';
 import DeckOfCardsAPI from '../services/deckofcardsapi';
 import GameContext from './GameContext';
@@ -24,7 +25,7 @@ const GameProvider = ({ children }) => {
 	const [cardPlayerTwo, setCardPlayerTwo] = useState([]);
 
 	// cartas restantes en la baraja
-	const [remaining, setRemaining] = useState(32);
+	const [remaining, setRemaining] = useState();
 	
 	// array cuartas
 	const [cuartas, setCuartas] = useState([]);
@@ -38,6 +39,12 @@ const GameProvider = ({ children }) => {
 	// array uniques
 	const [unique, setUnique] = useState([]);
 
+	// pintas
+	const [heart, setHeart] = useState([]);
+	const [diamonds, setDiamonds] = useState([]);
+	const [spades, setSpades] = useState([]);
+	const [clubs, setClubs] = useState([]);
+
 	// configuración ganador
 	const [win, setWin] = useState(false);
 	const [winName, setWinName] = useState('');
@@ -45,42 +52,144 @@ const GameProvider = ({ children }) => {
 	// mostrar mensaje de finalización del juego - sin ganador
 	const [endGame, setEndGame] = useState(false);
 	
-	// Obtener id de juego
+	// Iniciar el juego
 	const playGame = async () => {
-		setIdGame(await DeckOfCardsAPI.getIdGame());
-	};
-
-	// Solicitar cartas iniciales para ambos jugadores
-	const requestCards = async () => {
-		const cards1 = await DeckOfCardsAPI.getCards(idGame);
-		const cards2 = await DeckOfCardsAPI.getCards(idGame);
-		console.log(cards1)
-		console.log(cards2)
+		const id = await DeckOfCardsAPI.getIdGame(); // obtener id del juego
+		setIdGame(id);
+		const cards1 = await DeckOfCardsAPI.initialCards(id);
+		const cards2 = await DeckOfCardsAPI.initialCards(id);
+	//	console.log(cards1);
+	//	console.log(cards2);
 		setPlayerOne({ ...playerOne, cards: [...playerOne.cards, ...cards1] });
 		setPlayerTwo({ ...playerTwo, cards: [...playerTwo.cards, ...cards2] });
-
 		setCurrentCards([...cards1]);
-	//	setMoveCards([...cards1]);
-		// console.log('current cards')
-		// console.log(currentCards)  
+		// console.log(cards1);
+		const rem = await DeckOfCardsAPI.getRemaining(id);
+		setRemaining(rem);
+	//	divideCards(cards1);
+		splitCards([...cards1]);
 
 	};
 
-
-	// Obtener nuevas cartas para ambos jugadores
-	const requestCard = async () => {
+	const requestTwoCards = async () => {
 		const cards = await DeckOfCardsAPI.getNewCards(idGame);
-	//	console.log(cards)
 		setCardPlayerOne([cards[0]]);
 		setCardPlayerTwo([cards[1]]);
+		const rem = await DeckOfCardsAPI.getRemaining(idGame);
+		setRemaining(rem);
+
+		addNewCard(cards[0])
+	};
+
+	const divideCards = (c) => {
+		const cards = c;
+		const hearts = cards.filter((card) => card.suit === 'HEARTS');
+		const clb = cards.filter((card) => card.suit === 'CLUBS');
+		const diam = cards.filter((card) => card.suit === 'DIAMONDS');
+		const espadas = cards.filter((card) => card.suit === 'SPADES');
+		const esc =["2","3","4","5","6","7","8","9","0","JACK","QUEEN","KING","ACE","2","3","4"];
+		hearts.map((card) => {
+			for (let i = 0; i < esc.length; i++) {
+				console.log('')
+			
+			}
+			return card  // retorna la carta
+		});
+		
+		setHeart([...heart, ...hearts]);
+		setDiamonds([...diamonds,...diam]);
+		setClubs([...clubs,...clb]);
+		setSpades([...spades,...espadas]);
+	};
+
+	const escaleras = () =>{
+		const cH = heart;
+		console.log(cH);
+		cH.forEach(element => {
+			console.log(element.suit)	
+		});
+	};
+
+	// dividir las cartas al iniciar el juego
+	const splitCards = (cplayerOne) => { 
+	//	console.log(cplayerOne)
+		const cards = cplayerOne
+	//	console.log(cards)
+		const c = [];
+		const t = [];
+		const p = [];
+		const u = []; 
+		
+		while(cards.length > 0){
+			cards.map((card) => {
+				const first = cards[0].code
+				console.log("first: " + first )
+
+				const matches = cards
+				.filter((card) => card.code[0] === first[0])
+				.map((card) => {
+					console.log("eliminar del array: ")
+					console.log(card)
+					// index de elemento a eliminar
+					const p = cards.map(card1 => card1.code).indexOf(card.code)
+					console.log("pos: " + p)
+
+					// eliminación del elemento en el array cards
+					cards.splice(p, 1);
+					console.log("cartas: ")
+					console.log(cards)
+					console.log("longitud" + cards.length)
+					return card  // retorna la carta
+				});
+				
+				console.log("coincidencias")
+				console.log(matches)
+			// console.log("longitud " + matches.length)
+				if (matches.length === 4){
+				//	console.log("cuarta")
+					 c.push(...matches)
+				}
+				else if( matches.length === 3){
+				//	console.log("terna")
+					 t.push(...matches)
+				}
+				else if( matches.length === 2 ){
+				//	console.log("par")
+				    p.push(...matches)
+				}
+				else{
+					u.push(...matches)
+				//	console.log("ingreso unico")			   
+				} 
+			
+				return null
+			})
+		}
+		// console.log(cards)
+		// console.log(c)
+		setCuartas([...cuartas, ...c])
+		// console.log(t)
+		setTernas([...ternas, ...t])
+		// console.log(p)
+		setPares([...pares, ...p])
+		// console.log(u)
+		setUnique([...unique, ...u])
+
+	} 
+
+	// Obtener nuevas cartas para ambos jugadores
+	const addNewCard = (newCard) => {
 
 		const cardsOne = playerOne.cards;
 		const unicos = unique;
-		const c = playerOne;
+		// const pairs = pares;
+		const c = ({...playerOne});
 
 		const cuarta = ternas.find(
-			(card) => card.code[0] === cards[0].code[0]
+			(card) => card.code[0] === newCard.code[0]
 		);
+		let l = cuartas.length + ternas.length + pares.length + unique.length
+		console.log("longitud4: " + l)
 
 		if(cuarta!= null && cuartas.length === 0){
 			// formar cuartas
@@ -98,33 +207,42 @@ const GameProvider = ({ children }) => {
 					return card 
 			});	
 				
-				matches.push(cards[0])
+				matches.push(newCard)
 				setCuartas([...cuartas, ...matches])
 
 				if(unique.length !== 0){
 
 					const first = unicos.shift();
+				//	console.log("item a eliminar")
+				//	console.log(first)
+
+					const p = cardsOne.map(card => card.code).indexOf(first.code)
+				//	console.log(p)
+
+					c.cards[p] = newCard
+				//	console.log(c)
+				
+				}
+				/* else if(pares.length !== 0){
+					const first = pairs.shift();
 					console.log("item a eliminar")
 					console.log(first)
 
 					const p = cardsOne.map(card => card.code).indexOf(first.code)
 					console.log(p)
 
-					c.cards[p] = cards[0]
+					c.cards[p] = newCard
 					console.log(c)
-				
-				/*	setPlayerOne({ ...playerOne, cards: [...playerOne.cards,
-						[p]: ...cards[0] ]}) */
-					
-					// setUnique(...unicos)
-				}
+				} */
 
+			
 		}else{
 			const terna = pares.find(
-				(card) => card.code[0] === cards[0].code[0]
+				(card) => card.code[0] === newCard.code[0]
 			);
 
-			if(terna != null && ternas.length < 6){
+		//	if(terna != null && ternas.length < 6){
+			if(terna != null){
 				// formar pares
 				const cardsPar = pares;
 
@@ -140,34 +258,43 @@ const GameProvider = ({ children }) => {
 						return card 
 					});	
 				
-				matches.push(cards[0])
+				matches.push(newCard)
 				setTernas([...ternas, ...matches])
 
 				if(unique.length !== 0){
 
 					const first = unicos.shift();
+				//	console.log("item a eliminar")
+				//	console.log(first)
+
+					const p = cardsOne.map(card => card.code).indexOf(first.code)
+				//	console.log(p)
+
+					c.cards[p] = newCard
+				//	console.log(c)
+				
+				}
+				/* else if(pares.length !== 0){
+					const first = pairs.shift();
 					console.log("item a eliminar")
 					console.log(first)
 
 					const p = cardsOne.map(card => card.code).indexOf(first.code)
 					console.log(p)
 
-					c.cards[p] = cards[0]
+					c.cards[p] = newCard
 					console.log(c)
-				
-				/*	setPlayerOne({ ...playerOne, cards: [...playerOne.cards,
-						[p]: ...cards[0] ]}) */
-					
-					// setUnique(...unicos)
-				}
+				} */
 
 			}else{
 
 				const par = unique.find(
-					(card) => card.code[0] === cards[0].code[0]
+					(card) => card.code[0] === newCard.code[0]
 				);
+
+//if(l + 1 === 11) 
 	
-				if(par != null){
+				if(par != null  ){
 					// formar pares
 					const cardsU = unique;
 					
@@ -182,7 +309,7 @@ const GameProvider = ({ children }) => {
 							return card 
 						});	
 					
-					matches.push(cards[0])
+					matches.push(newCard)
 					setPares([...pares, ...matches])
 
 					if(unique.length !== 0){
@@ -190,25 +317,32 @@ const GameProvider = ({ children }) => {
 						const unicos = unique;
 	
 						const first = unicos.shift();
+					//	console.log("item a eliminar")
+					//	console.log(first)
+	
+						const p = cardsOne.map(card => card.code).indexOf(first.code)
+					//	console.log(p)
+
+						c.cards[p] = newCard
+					//	console.log(c)
+						// setPlayerOne({...c})
+					
+					} /*
+					else if(pares.length !== 0){
+						const first = pairs.shift();
 						console.log("item a eliminar")
 						console.log(first)
 	
 						const p = cardsOne.map(card => card.code).indexOf(first.code)
 						console.log(p)
-
-						c.cards[p] = cards[0]
+	
+						c.cards[p] = newCard
 						console.log(c)
-						// setPlayerOne({...c})
-					
-					/*	setPlayerOne({ ...playerOne, cards: [...playerOne.cards,
-							[p]: ...cards[0] ]}) */
-						
-						// setUnique(...unicos)
-					}
+					} */
 
 				}
 			}
-		}
+		} 
 
 		if(cuartas.length === 1 && ternas.length === 6 ) {
 			setWin(true);
@@ -216,27 +350,26 @@ const GameProvider = ({ children }) => {
 		}
 
 
-	};
+	}; 
+	
 
 	// Obtener cartas restantes
-	const requestRemaining = () => {
+	/* const requestRemaining = () => {
 		setRemaining(remaining - 2);
-	}
+	} */
 
 	
 	return (
 		<GameContext.Provider
 			value={{
 				playGame,
-				requestCards,
 				playerOne,
 				setPlayerOne,
 				playerTwo,
 				setPlayerTwo,
-				requestCard,
+				requestTwoCards,
 				cardPlayerOne,
 				cardPlayerTwo,
-				requestRemaining,
 				remaining,
 				endGame,
 				setEndGame,
@@ -249,6 +382,12 @@ const GameProvider = ({ children }) => {
 				pares,
 				setUnique,
 				unique,
+				divideCards,
+				heart,
+				clubs,
+				diamonds,
+				spades,
+				escaleras,
 				win,
 				winName,
 				setWinName,
