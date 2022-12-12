@@ -198,7 +198,7 @@ const GameProvider = ({ children }) => {
 
 						c.cards[p] = cards[0]
 						console.log(c)
-						setPlayerOne({...c})
+						// setPlayerOne({...c})
 					
 					/*	setPlayerOne({ ...playerOne, cards: [...playerOne.cards,
 							[p]: ...cards[0] ]}) */
