@@ -4,7 +4,7 @@ import Col from 'react-bootstrap/Col';
 import FormPlay from '../components/FormPlay';
 import ListCards from '../components/ListCards';
 import EndGame from '../components/EndGame';
-import ViewComponents from '../components/ViewComponents';
+// import ViewComponents from '../components/ViewComponents';
 import Winner from '../components/Winner';
 
 const GamePage = () => {
@@ -24,11 +24,11 @@ const GamePage = () => {
 						<EndGame />
 					</Col>
 				</Row>
-				<Row>
+				{/* <Row>
 					<Col>
 						<ViewComponents />
 					</Col>
-				</Row>
+				</Row> */}
 				<Row>
 					<Col>
 						<Winner />

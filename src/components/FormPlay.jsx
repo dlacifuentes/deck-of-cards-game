@@ -1,31 +1,16 @@
 import Button from 'react-bootstrap/Button';
 import Stack from 'react-bootstrap/Stack';
 import useGame from '../hooks/useGame';
-// import {useEffect } from 'react';
-// import EndGame from '../components/EndGame';
 
 const FormPlay = () => {
-	// const { requestTwoCards, requestCard, requestRemaining, remaining, setEndGame } = useGame();
-	const { requestTwoCards, remaining, setEndGame } = useGame();
 
-/*	useEffect(() => {
-		const requestCard = async () => {
-		await requestCards();
-		}
-	requestCard()
-	.catch(console.error);
-	}, []) */
+	const { requestTwoCards, remaining, setEndGame, win } = useGame();
 	
 	const handleClick = async () => {
-	//	requestRemaining();
-		if(remaining > 0) {
-			await requestTwoCards();
-		} else{
-			setEndGame(true);
-			// return (<EndGame />);
-		}
-		
+		if(remaining > 0 && win === false) await requestTwoCards();
+		else setEndGame(true);
 	};
+
 	return (
 		<Stack gap={2} className='col-md-5 mx-auto'>
 			<Button onClick={handleClick} variant='secondary'>

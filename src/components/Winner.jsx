@@ -5,19 +5,21 @@ import ToastContainer from 'react-bootstrap/ToastContainer';
 
 const Winner = () => {
 
-	const { win, winName, setWinName } = useGame();
-	
+	const { win, winName, setWin } = useGame();
+
 	return (
-		<ToastContainer className='p-3' position='top-start'>
-			<Toast show={win} onClose={() => setWinName(false)}>
+		<ToastContainer className='p-3' position='top-center'>
+			<Toast show={win} onClose={() => setWin(false)}>
 				<Toast.Header>
 					<div>
 						<TfiGame />
 					</div>
-					<strong className='me-auto'>Deck Of cards</strong>
+					<strong className='me-auto'>Deck of cards game</strong>
 					<small>Winner</small>
 				</Toast.Header>
-				<Toast.Body>Player {winName}</Toast.Body>
+				<Toast.Body>
+					Player {winName}
+				</Toast.Body>
 			</Toast>
 		</ToastContainer>
 	);

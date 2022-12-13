@@ -101,13 +101,14 @@ const GameProvider = ({ children }) => {
 
 	const requestTwoCards = async () => {
 
-		if(cuartas.length === 0 && ternas.length < 6 ) {
+		if(!win) {
 			const cards = await DeckOfCardsAPI.getNewCards(idGame);
 			setCardPlayerOne([cards[0]]);
 			setCardPlayerTwo([cards[1]]);
 			const rem = await DeckOfCardsAPI.getRemaining(idGame);
 			setRemaining(rem);
 			addNewCard(cards[0]);
+			addNewCardTwo(cards[1]);
 		}
 		
 	};
@@ -219,8 +220,8 @@ const GameProvider = ({ children }) => {
 		setUniqueTwo([...uniqueTwo, ...u])
 	}; 
 
-	// Obtener nuevas cartas para ambos jugadores
-	const addNewCard = (newCard) => {
+	// Añadir nueva carta - jugador 1
+	const addNewCard = (newCard, dataPlayer ) => {
 
 		const cardsOne = playerOne.cards;
 		const unicos = unique;
@@ -259,8 +260,53 @@ const GameProvider = ({ children }) => {
 		if(cuartas.length === 4 && ternas.length === 6 ) {
 			setWin(true);
 			setWinName(playerOne.name);
+			setPlayerOne({ ...playerOne, cards: [...cuartas, ...ternas] });
 		}
 
+	}; 
+
+	// Añadir nueva carta - jugador 2
+	const addNewCardTwo = (newCard) => {
+
+		const cardsOne = playerTwo.cards;
+		const unicos = uniqueTwo;
+		const pairs = paresTwo;
+		const c = ({...playerTwo});
+
+		const cuarta = ternasTwo.find(
+			(card) => card.code[0] === newCard.code[0]
+		);
+
+		if(cuarta != null && cuartasTwo.length === 0){
+			// formar cuartas
+			const matches = locateCard(ternasTwo, cuarta, newCard, cardsOne, c, unicos, pairs)
+			setCuartasTwo([...cuartasTwo, ...matches])	
+		}else{
+			const terna = paresTwo.find(
+				(card) => card.code[0] === newCard.code[0]
+			);
+		//	if(terna != null && ternas.length < 6){
+			if(terna != null){
+				// formar pares
+				const matches = locateCard(paresTwo, terna, newCard, cardsOne, c, unicos, pairs)
+				setTernasTwo([...ternasTwo, ...matches])
+			}else{
+				const par = uniqueTwo.find(
+					(card) => card.code[0] === newCard.code[0]
+				);
+				if(par != null  ){
+					// formar pares
+					const matches = locateCard(uniqueTwo, par, newCard, cardsOne, c, unicos, pairs)
+					setParesTwo([...paresTwo, ...matches])
+				}
+			}
+		} 
+
+		if(cuartasTwo.length === 4 && ternasTwo.length === 6 ) {
+			setWin(true);
+			setWinName(playerTwo.name);
+			setPlayerTwo({ ...playerTwo, cards: [...cuartasTwo, ...ternasTwo] });
+		}
 
 	}; 
 
@@ -287,7 +333,7 @@ const GameProvider = ({ children }) => {
 			c.cards[p] = newCard
 				
 		}
-		else if(pares.length !== 0){
+		else if(pairs.length !== 0){
 
 			matches = cardsArray
 				.filter((card) => card.code[0] === cardToMove.code[0])
@@ -347,7 +393,7 @@ const GameProvider = ({ children }) => {
 				escaleras,
 				win,
 				winName,
-				setWinName,
+				setWin,
 				paresTwo, ternasTwo, cuartasTwo, uniqueTwo,
 			}}
 		>

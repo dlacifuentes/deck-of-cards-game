@@ -2,14 +2,21 @@ import Toast from 'react-bootstrap/Toast';
 import useGame from '../hooks/useGame';
 import { TfiGame } from 'react-icons/tfi';
 import ToastContainer from 'react-bootstrap/ToastContainer';
+import { useNavigate } from 'react-router-dom';
+import App from '../App';
 
 const EndGame = () => {
 
 	const { endGame, setEndGame } = useGame();
+	const navigate = useNavigate();
 
 	return (
 		<ToastContainer className='p-3' position='top-center'>
-			<Toast show={endGame} onClose={() => setEndGame(false)}>
+			<Toast show={endGame} onClose={() => {
+				setEndGame(false) 
+				navigate('/', { replace: true });
+				App();}
+				}>
 				<Toast.Header>
 					<div>
 						<TfiGame />
