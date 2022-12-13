@@ -5,6 +5,7 @@ import FormPlay from '../components/FormPlay';
 import ListCards from '../components/ListCards';
 import EndGame from '../components/EndGame';
 import ViewComponents from '../components/ViewComponents';
+import Winner from '../components/Winner';
 
 const GamePage = () => {
 	return (
@@ -26,6 +27,11 @@ const GamePage = () => {
 				<Row>
 					<Col>
 						<ViewComponents />
+					</Col>
+				</Row>
+				<Row>
+					<Col>
+						<Winner />
 					</Col>
 				</Row>
 			</Container>

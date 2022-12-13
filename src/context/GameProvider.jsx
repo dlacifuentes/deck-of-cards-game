@@ -100,12 +100,16 @@ const GameProvider = ({ children }) => {
 	};
 
 	const requestTwoCards = async () => {
-		const cards = await DeckOfCardsAPI.getNewCards(idGame);
-		setCardPlayerOne([cards[0]]);
-		setCardPlayerTwo([cards[1]]);
-		const rem = await DeckOfCardsAPI.getRemaining(idGame);
-		setRemaining(rem);
-		addNewCard(cards[0]);
+
+		if(cuartas.length === 0 && ternas.length < 6 ) {
+			const cards = await DeckOfCardsAPI.getNewCards(idGame);
+			setCardPlayerOne([cards[0]]);
+			setCardPlayerTwo([cards[1]]);
+			const rem = await DeckOfCardsAPI.getRemaining(idGame);
+			setRemaining(rem);
+			addNewCard(cards[0]);
+		}
+		
 	};
 
 	const divideCards = (c) => {
@@ -220,7 +224,7 @@ const GameProvider = ({ children }) => {
 
 		const cardsOne = playerOne.cards;
 		const unicos = unique;
-		// const pairs = pares;
+		const pairs = pares;
 		const c = ({...playerOne});
 
 		const cuarta = ternas.find(
@@ -229,7 +233,7 @@ const GameProvider = ({ children }) => {
 
 		if(cuarta!= null && cuartas.length === 0){
 			// formar cuartas
-			const matches = locateCard(ternas, cuarta, newCard, cardsOne, c, unicos)
+			const matches = locateCard(ternas, cuarta, newCard, cardsOne, c, unicos, pairs)
 			setCuartas([...cuartas, ...matches])	
 		}else{
 			const terna = pares.find(
@@ -238,7 +242,7 @@ const GameProvider = ({ children }) => {
 		//	if(terna != null && ternas.length < 6){
 			if(terna != null){
 				// formar pares
-				const matches = locateCard(pares, terna, newCard, cardsOne, c, unicos)
+				const matches = locateCard(pares, terna, newCard, cardsOne, c, unicos, pairs)
 				setTernas([...ternas, ...matches])
 			}else{
 				const par = unique.find(
@@ -246,13 +250,13 @@ const GameProvider = ({ children }) => {
 				);
 				if(par != null  ){
 					// formar pares
-					const matches = locateCard(unique, par, newCard, cardsOne, c, unicos)
+					const matches = locateCard(unique, par, newCard, cardsOne, c, unicos, pairs)
 					setPares([...pares, ...matches])
 				}
 			}
 		} 
 
-		if(cuartas.length === 1 && ternas.length === 6 ) {
+		if(cuartas.length === 4 && ternas.length === 6 ) {
 			setWin(true);
 			setWinName(playerOne.name);
 		}
@@ -260,39 +264,53 @@ const GameProvider = ({ children }) => {
 
 	}; 
 
-	const locateCard = (cardsArray, cardToMove, newCard, cardsOne, c, unicos) =>{
-				
-		const matches = cardsArray
-			.filter((card) => card.code[0] === cardToMove.code[0])
-			.map((card) => {						
-			// index de elemento a eliminar
-			const p = cardsArray.map(card1 => card1.code).indexOf(card.code)
-					
-			// eliminación del elemento en el array 
-			cardsArray.splice(p, 1);
+	const locateCard = (cardsArray, cardToMove, newCard, cardsOne, c, unicos, pairs) =>{
 
-			return card 
-		});	
+		let matches = [];
 				
-		matches.push(newCard)	
+		if(unicos.length !== 0 && cardsArray.length > 1){
+			matches = cardsArray
+				.filter((card) => card.code[0] === cardToMove.code[0])
+				.map((card) => {						
+				// index de elemento a eliminar
+				const p = cardsArray.map(card1 => card1.code).indexOf(card.code)
+						
+				// eliminación del elemento en el array 
+				cardsArray.splice(p, 1);
 
-		if(unique.length !== 0){
+				return card 
+			});			
+			matches.push(newCard)	
+
 			const first = unicos.shift();
 			const p = cardsOne.map(card => card.code).indexOf(first.code)
 			c.cards[p] = newCard
 				
 		}
-				/* else if(pares.length !== 0){
-					const first = pairs.shift();
-					console.log("item a eliminar")
-					console.log(first)
+		else if(pares.length !== 0){
 
-					const p = cardsOne.map(card => card.code).indexOf(first.code)
-					console.log(p)
+			matches = cardsArray
+				.filter((card) => card.code[0] === cardToMove.code[0])
+				.map((card) => {						
+				// index de elemento a eliminar
+				const p = cardsArray.map(card1 => card1.code).indexOf(card.code)
+						
+				// eliminación del elemento en el array 
+				cardsArray.splice(p, 1);
 
-					c.cards[p] = newCard
-					console.log(c)
-				} */
+				return card 
+			});		
+			
+			matches.push(newCard)
+
+			const first = pairs.shift();
+			const second = pairs.shift();
+			const p = cardsOne.map(card => card.code).indexOf(first.code)
+			c.cards[p] = newCard
+
+			unicos.push(second)
+			
+		} 
 
 		return matches
 
