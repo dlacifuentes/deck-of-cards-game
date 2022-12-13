@@ -7,15 +7,16 @@ import App from '../App';
 
 const EndGame = () => {
 
-	const { endGame, setEndGame } = useGame();
+	const { endGame, setEndGame, resetGame } = useGame();
 	const navigate = useNavigate();
 
 	return (
 		<ToastContainer className='p-3' position='top-center'>
 			<Toast show={endGame} onClose={() => {
-				setEndGame(false) 
-				navigate('/', { replace: true });
-				App();}
+					setEndGame(false)
+					resetGame();
+					navigate('/', { replace: true });
+					App();}
 				}>
 				<Toast.Header>
 					<div>

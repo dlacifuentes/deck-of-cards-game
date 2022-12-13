@@ -1,4 +1,3 @@
-import { useEffect } from 'react';
 import { useState } from 'react';
 import DeckOfCardsAPI from '../services/deckofcardsapi';
 import GameContext from './GameContext';
@@ -64,10 +63,10 @@ const GameProvider = ({ children }) => {
 	const [uniqueEscTwo, setUniqueEscTwo] = useState([]);
 
 	// pintas
-	const [heart, setHeart] = useState([]);
+/*	const [heart, setHeart] = useState([]);
 	const [diamonds, setDiamonds] = useState([]);
 	const [spades, setSpades] = useState([]);
-	const [clubs, setClubs] = useState([]);
+	const [clubs, setClubs] = useState([]); */
 
 	// configuración ganador
 	const [win, setWin] = useState(false);
@@ -75,6 +74,49 @@ const GameProvider = ({ children }) => {
 
 	// mostrar mensaje de finalización del juego - sin ganador
 	const [endGame, setEndGame] = useState(false);
+
+	// eliminar datos
+	const resetGame = () => {
+		setIdGame(null);
+		setPlayerOne({
+			name: '',
+			cards: [],
+		});
+		setPlayerTwo({
+			name: '',
+			cards: [],
+		});
+		setCurrentCards([]);
+		setCurrentCardsEsc([]);
+		setCurrentCardsTwo([]);
+		setCurrentCardsEscTwo([]);
+		setCardPlayerOne([]);
+		setCardPlayerTwo([]);
+		setRemaining(0);
+		setCuartas([]);
+		setCuartasEsc([]);
+		setCuartasTwo([]);
+		setCuartasEscTwo([]);
+		setTernas([]);
+		setTernasEsc([]);
+		setTernasTwo([]);
+		setTernasEscTwo([]);
+		setPares([]);
+		setParesEsc([]);
+		setParesTwo([]);
+		setParesEscTwo([]);
+		setUnique([]);
+		setUniqueEsc([]);
+		setUniqueTwo([]);
+		setUniqueEscTwo([]);
+	/*	setHeart([]);
+		setDiamonds([]);
+		setSpades([]);
+		setClubs([]); */
+		setWin(false);
+		setWinName('');
+		setEndGame(false);
+	};
 	
 	// Iniciar el juego
 	const playGame = async () => {
@@ -82,18 +124,14 @@ const GameProvider = ({ children }) => {
 		setIdGame(id);
 		const cards1 = await DeckOfCardsAPI.initialCards(id);
 		const cards2 = await DeckOfCardsAPI.initialCards(id);
-	//	console.log(cards1);
-	//	console.log(cards2);
 		setPlayerOne({ ...playerOne, cards: [...playerOne.cards, ...cards1] });
 		setPlayerTwo({ ...playerTwo, cards: [...playerTwo.cards, ...cards2] });
 		setCurrentCards([...cards1]);
 		setCurrentCardsEsc([...cards1]);
 		setCurrentCardsTwo([...cards2]);
 		setCurrentCardsEscTwo([...cards2]);
-		// console.log(cards1);
 		const rem = await DeckOfCardsAPI.getRemaining(id);
 		setRemaining(rem);
-	//	divideCards(cards1);
 		splitCards([...cards1]);
 		splitCardsTwo([...cards2]);
 
@@ -111,34 +149,6 @@ const GameProvider = ({ children }) => {
 			addNewCardTwo(cards[1]);
 		}
 		
-	};
-
-	const divideCards = (c) => {
-		const cards = c;
-		const hearts = cards.filter((card) => card.suit === 'HEARTS');
-		const clb = cards.filter((card) => card.suit === 'CLUBS');
-		const diam = cards.filter((card) => card.suit === 'DIAMONDS');
-		const espadas = cards.filter((card) => card.suit === 'SPADES');
-		const esc =["2","3","4","5","6","7","8","9","0","JACK","QUEEN","KING","ACE","2","3","4"];
-		hearts.map((card) => {
-			for (let i = 0; i < esc.length; i++) {
-				console.log('')
-			}
-			return card  // retorna la carta
-		});
-		
-		setHeart([...heart, ...hearts]);
-		setDiamonds([...diamonds,...diam]);
-		setClubs([...clubs,...clb]);
-		setSpades([...spades,...espadas]);
-	};
-
-	const escaleras = () =>{
-		const cH = heart;
-		console.log(cH);
-		cH.forEach(element => {
-			console.log(element.suit)	
-		});
 	};
 
 	// dividir las cartas al iniciar el juego
@@ -371,30 +381,23 @@ const GameProvider = ({ children }) => {
 				playerTwo,
 				setPlayerTwo,
 				requestTwoCards,
+				remaining,
 				cardPlayerOne,
 				cardPlayerTwo,
-				remaining,
-				endGame,
-				setEndGame,
-				cuartas,
-				setCuartas,
-				currentCards,
-				setTernas,
-				setPares,
-				ternas,
-				pares,
-				setUnique,
-				unique,
-				divideCards,
-				heart,
-				clubs,
-				diamonds,
-				spades,
-				escaleras,
 				win,
 				winName,
 				setWin,
-				paresTwo, ternasTwo, cuartasTwo, uniqueTwo,
+				endGame,
+				setEndGame,
+				resetGame,
+				/* cuartas,
+				ternas,
+				pares,
+				unique,
+				paresTwo, 
+				ternasTwo, 
+				cuartasTwo, 
+				uniqueTwo, */
 			}}
 		>
 			{children}
