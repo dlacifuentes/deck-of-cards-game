@@ -1,14 +1,14 @@
 import useGame from '../hooks/useGame';
 
-const ViewComponents = () => {
-    const { pares, ternas, cuartas, unique } = useGame();
+const ViewComponentsTwo = () => {
+    const { paresTwo, ternasTwo, cuartasTwo, uniqueTwo  } = useGame();
 
   return (
     <div>
 		<br></br>
 		<h5>Equal Suit</h5>
-		<p>Unicos</p>
-			{unique.map((card, index) => (
+        <p>Unicos</p>
+			{uniqueTwo.map((card, index) => (
 				<img
 					className='col-sm-1 col-lg-1 mx-2 my-2'
 					key={index}
@@ -16,8 +16,8 @@ const ViewComponents = () => {
 				    alt={card.value}
 				/>
 			))}
-        <p>Pares</p>
-			{pares.map((card, index) => (
+		<p>Pares</p>
+			{paresTwo.map((card, index) => (
 				<img
 					className='col-sm-1 col-lg-1 mx-2 my-2'
 					key={index}
@@ -25,8 +25,8 @@ const ViewComponents = () => {
 				    alt={card.value}
 				/>
 			))}
-        <p>Ternas</p>
-			{ternas.map((card, index) => (
+		<p>Ternas</p>
+			{ternasTwo.map((card, index) => (
 				<img
 					className='col-sm-1 col-lg-1 mx-2 my-2'
 					key={index}
@@ -35,7 +35,7 @@ const ViewComponents = () => {
 				/>
 			))}
 		<p>Cuartas</p>
-			{cuartas.map((card, index) => (
+			{cuartasTwo.map((card, index) => (
 				<img
 					className='col-sm-1 col-lg-1 mx-2 my-2'
 					key={index}
@@ -47,4 +47,4 @@ const ViewComponents = () => {
   )
 }
 
-export default ViewComponents
+export default ViewComponentsTwo

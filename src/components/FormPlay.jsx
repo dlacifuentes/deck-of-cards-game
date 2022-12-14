@@ -8,7 +8,7 @@ const FormPlay = () => {
 	
 	const handleClick = async () => {
 		if(remaining > 0 && win === false) await requestTwoCards();
-		else setEndGame(true);
+		else if(!win) setEndGame(true);
 	};
 
 	return (

@@ -828,6 +828,7 @@ const GameProvider = ({ children }) => {
 		const cardsOne = playerOne.cards;
 		const unicos = unique;
 		const pairs = pares;
+		const pairsEsc = paresEsc;
 		const c = ({...playerOne});
 
 		const cuarta = ternas.find(
@@ -836,7 +837,7 @@ const GameProvider = ({ children }) => {
 
 		if(cuarta!= null && cuartas.length === 0 && cuartasEsc.length === 0){
 			// formar cuartas
-			const matches = locateCard(ternas, cuarta, newCard, cardsOne, c, unicos, pairs)
+			const matches = locateCard(ternas, cuarta, newCard, cardsOne, c, unicos, pairs, pairsEsc)
 			setCuartas([...cuartas, ...matches])	
 		}else{
 			const terna = pares.find(
@@ -845,7 +846,7 @@ const GameProvider = ({ children }) => {
 		//	if(terna != null && ternas.length < 6){
 			if(terna != null){
 				// formar pares
-				const matches = locateCard(pares, terna, newCard, cardsOne, c, unicos, pairs)
+				const matches = locateCard(pares, terna, newCard, cardsOne, c, unicos, pairs, pairsEsc)
 				setTernas([...ternas, ...matches])
 			}else{
 				const par = unique.find(
@@ -853,7 +854,7 @@ const GameProvider = ({ children }) => {
 				);
 				if(par != null  ){
 					// formar pares
-					const matches = locateCard(unique, par, newCard, cardsOne, c, unicos, pairs)
+					const matches = locateCard(unique, par, newCard, cardsOne, c, unicos, pairs, pairsEsc)
 					setPares([...pares, ...matches])
 				}
 			}
@@ -893,6 +894,7 @@ const GameProvider = ({ children }) => {
 		const cardsTwo = playerTwo.cards;
 		const unicos = uniqueTwo;
 		const pairs = paresTwo;
+		const pairsEsc = paresEscTwo;
 		const c = ({...playerTwo});
 
 		const cuarta = ternasTwo.find(
@@ -901,7 +903,7 @@ const GameProvider = ({ children }) => {
 
 		if(cuarta != null && cuartasTwo.length === 0 && cuartasEscTwo.length === 0){
 			// formar cuartas
-			const matches = locateCard(ternasTwo, cuarta, newCard, cardsTwo, c, unicos, pairs)
+			const matches = locateCard(ternasTwo, cuarta, newCard, cardsTwo, c, unicos, pairs, pairsEsc)
 			setCuartasTwo([...cuartasTwo, ...matches])	
 		}else{
 			const terna = paresTwo.find(
@@ -910,7 +912,7 @@ const GameProvider = ({ children }) => {
 		//	if(terna != null && ternas.length < 6){
 			if(terna != null){
 				// formar pares
-				const matches = locateCard(paresTwo, terna, newCard, cardsTwo, c, unicos, pairs)
+				const matches = locateCard(paresTwo, terna, newCard, cardsTwo, c, unicos, pairs, pairsEsc)
 				setTernasTwo([...ternasTwo, ...matches])
 			}else{
 				const par = uniqueTwo.find(
@@ -918,7 +920,7 @@ const GameProvider = ({ children }) => {
 				);
 				if(par != null  ){
 					// formar pares
-					const matches = locateCard(uniqueTwo, par, newCard, cardsTwo, c, unicos, pairs)
+					const matches = locateCard(uniqueTwo, par, newCard, cardsTwo, c, unicos, pairs, pairsEsc)
 					setParesTwo([...paresTwo, ...matches])
 				}
 			}
@@ -952,7 +954,7 @@ const GameProvider = ({ children }) => {
 
 	}; 
 
-	const locateCard = (cardsArray, cardToMove, newCard, cardsOne, c, unicos, pairs) =>{
+	const locateCard = (cardsArray, cardToMove, newCard, cardsOne, c, unicos, pairs, pairsEsc) =>{
 
 		let matches = [];
 				
@@ -975,7 +977,7 @@ const GameProvider = ({ children }) => {
 			c.cards[p] = newCard
 				
 		}
-		else if(pairs.length !== 0){
+		else if( pairs.length !== 0 ){
 
 			matches = cardsArray
 				.filter((card) => card.code[0] === cardToMove.code[0])
@@ -991,14 +993,46 @@ const GameProvider = ({ children }) => {
 			
 			matches.push(newCard)
 
-			const first = pairs.shift();
-			const second = pairs.shift();
+			if(pairs.length > 0){
+				const first = pairs.shift();
+				const second = pairs.shift();
+				const p = cardsOne.map(card => card.code).indexOf(first.code)
+				c.cards[p] = newCard
+
+				unicos.push(second)
+			}else if (pairsEsc.length !== 0){
+				const first = pairsEsc.shift();
+				const second = pairsEsc.shift();
+				const p = cardsOne.map(card => card.code).indexOf(first.code)
+				c.cards[p] = newCard
+
+				unicos.push(second)
+			}
+			
+		}else if(pairsEsc.length !== 0){
+
+			matches = cardsArray
+				.filter((card) => card.code[1] === cardToMove.code[1])
+				.map((card) => {						
+				// index de elemento a eliminar
+				const p = cardsArray.map(card1 => card1.code).indexOf(card.code)
+						
+				// eliminación del elemento en el array 
+				cardsArray.splice(p, 1);
+
+				return card 
+			});		
+			
+			matches.push(newCard)
+
+			const first = pairsEsc.shift();
+			const second = pairsEsc.shift();
 			const p = cardsOne.map(card => card.code).indexOf(first.code)
 			c.cards[p] = newCard
 
 			unicos.push(second)
-			
-		} 
+
+		}  
 
 		return matches
 

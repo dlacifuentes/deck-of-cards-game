@@ -2,17 +2,19 @@ import useGame from '../hooks/useGame';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 
-const ListPintas = () => {
+const ListPintasTwo = () => {
 
-    const { paresEsc, ternasEsc, cuartasEsc } = useGame();
+    const { paresEscTwo, ternasEscTwo, cuartasEscTwo } = useGame();
+
 
     return (
         <Row>
             <Col sm={11}>
                 <div className='align-items-center my-2'>
+                    <br></br>
                     <h5>Escaleras</h5>
                     <p>Pares</p>
-                    {paresEsc.map((card, index) => (
+                    {paresEscTwo.map((card, index) => (
                             <img
                                 className='col-sm-1 col-lg-1 mx-2 my-2'
                                 key={index}
@@ -21,7 +23,7 @@ const ListPintas = () => {
                             />
                         ))}
                     <p>Ternas</p>
-                    {ternasEsc.map((card, index) => (
+                    {ternasEscTwo.map((card, index) => (
                         <img
                             className='col-sm-1 col-lg-1 mx-2 my-2'
                             key={index}
@@ -30,7 +32,7 @@ const ListPintas = () => {
                         />
                     ))}
                     <p>Cuartas</p>
-                    {cuartasEsc.map((card, index) => (
+                    {cuartasEscTwo.map((card, index) => (
                         <img
                             className='col-sm-1 col-lg-1 mx-2 my-2'
                             key={index}
@@ -39,9 +41,9 @@ const ListPintas = () => {
                         />
                     ))}
                 </div>
-            </Col>
+                </Col>
         </Row>
     )
 }
 
-export default ListPintas
+export default ListPintasTwo

@@ -4,6 +4,10 @@ import Col from 'react-bootstrap/Col';
 import useGame from '../hooks/useGame';
 import ListCardPlayerOne from './ListCardPlayerOne';
 import ListCardPlayerTwo from './ListCardPlayerTwo';
+import ViewComponents from './ViewComponents';
+import ViewComponentsTwo from './ViewComponentsTwo';
+import ListPintas from './ListPintas';
+import ListPintasTwo from './ListPintasTwo';
 
 const ListCards = () => {
 
@@ -34,6 +38,12 @@ const ListCards = () => {
 						<ListCardPlayerOne />
 					</Col>
 				</Row>
+				{/* <Row>
+					<ListPintas />
+				</Row>
+				<Row>
+					<ViewComponents />
+				</Row> */}
 				<Row>
 					<Col sm={11}>
 					<div className='align-items-center my-2'>
@@ -53,6 +63,12 @@ const ListCards = () => {
 						<ListCardPlayerTwo />
 					</Col>
 				</Row>
+				{/* <Row>
+					<ListPintasTwo />
+				</Row>
+				<Row>
+					<ViewComponentsTwo />
+				</Row> */}
 		</Container>
 	);
 };
